@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5537D23F21C1672E00EA2F4D /* TurbolinksRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D23C21C1672E00EA2F4D /* TurbolinksRoute.swift */; };
+		5537D24021C1672E00EA2F4D /* TurbolinksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D23D21C1672E00EA2F4D /* TurbolinksMenuItem.swift */; };
+		5537D24121C1672E00EA2F4D /* TurbolinksSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D23E21C1672E00EA2F4D /* TurbolinksSession.swift */; };
+		5537D25521C1676D00EA2F4D /* TLManager+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25121C1676D00EA2F4D /* TLManager+Tabbar.swift */; };
+		5537D25621C1676D00EA2F4D /* TLManager+SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25221C1676D00EA2F4D /* TLManager+SessionDelegate.swift */; };
+		5537D25721C1676D00EA2F4D /* TLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25321C1676D00EA2F4D /* TLManager.swift */; };
+		5537D25821C1676D00EA2F4D /* TLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25421C1676D00EA2F4D /* TLNavigationController.swift */; };
+		5537D25E21C1677400EA2F4D /* TLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25B21C1677400EA2F4D /* TLViewController.swift */; };
+		5537D26421C1677C00EA2F4D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D26121C1677C00EA2F4D /* String+Extension.swift */; };
+		5537D26521C1677C00EA2F4D /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D26221C1677C00EA2F4D /* EdgeInsetLabel.swift */; };
+		5537D26621C1677C00EA2F4D /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D26321C1677C00EA2F4D /* CustomViewController.swift */; };
+		5537D35221C2A72600EA2F4D /* RNTLManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5537D35121C2A72600EA2F4D /* RNTLManagerBridge.m */; };
+		555DF5BD21E8D15A008BF9F5 /* SimpleFadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DF5BB21E8D15A008BF9F5 /* SimpleFadeAnimator.swift */; };
+		555DF5BE21E8D15A008BF9F5 /* TLReactViewVisitableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DF5BC21E8D15A008BF9F5 /* TLReactViewVisitableController.swift */; };
+		5565860E2293EF9100BC00DD /* TLCustomizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860A2293EF9100BC00DD /* TLCustomizerViewModel.swift */; };
+		5565860F2293EF9100BC00DD /* TLCustomizerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860B2293EF9100BC00DD /* TLCustomizerCell.swift */; };
+		556586102293EF9100BC00DD /* TLTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860C2293EF9100BC00DD /* TLTabBar.swift */; };
+		556586112293EF9100BC00DD /* TLCustomizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860D2293EF9100BC00DD /* TLCustomizerViewController.swift */; };
+		55CAEA04221EF1FE00B51C8B /* TLWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CAEA03221EF1FE00B51C8B /* TLWebView.swift */; };
+		55CAEA06221EF29200B51C8B /* TLScriptMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CAEA05221EF29200B51C8B /* TLScriptMessage.swift */; };
+		55CAEA1822200B7200B51C8B /* TLWebView.js in Resources */ = {isa = PBXBuildFile; fileRef = 55CAEA1722200B7200B51C8B /* TLWebView.js */; };
+		55FFD571222546D900B4FBF2 /* TLManager+WebViewDeletage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FFD570222546D900B4FBF2 /* TLManager+WebViewDeletage.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5537D22721C158B400EA2F4D /* libRNTLWebView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNTLWebView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5537D23C21C1672E00EA2F4D /* TurbolinksRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbolinksRoute.swift; sourceTree = "<group>"; };
+		5537D23D21C1672E00EA2F4D /* TurbolinksMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbolinksMenuItem.swift; sourceTree = "<group>"; };
+		5537D23E21C1672E00EA2F4D /* TurbolinksSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurbolinksSession.swift; sourceTree = "<group>"; };
+		5537D25121C1676D00EA2F4D /* TLManager+Tabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLManager+Tabbar.swift"; sourceTree = "<group>"; };
+		5537D25221C1676D00EA2F4D /* TLManager+SessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TLManager+SessionDelegate.swift"; sourceTree = "<group>"; };
+		5537D25321C1676D00EA2F4D /* TLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLManager.swift; sourceTree = "<group>"; };
+		5537D25421C1676D00EA2F4D /* TLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLNavigationController.swift; sourceTree = "<group>"; };
+		5537D25B21C1677400EA2F4D /* TLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLViewController.swift; sourceTree = "<group>"; };
+		5537D26121C1677C00EA2F4D /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		5537D26221C1677C00EA2F4D /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
+		5537D26321C1677C00EA2F4D /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		5537D26721C167F400EA2F4D /* RNTLWebView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNTLWebView-Bridging-Header.h"; sourceTree = "<group>"; };
+		5537D35121C2A72600EA2F4D /* RNTLManagerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTLManagerBridge.m; sourceTree = SOURCE_ROOT; };
+		555DF5BB21E8D15A008BF9F5 /* SimpleFadeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleFadeAnimator.swift; sourceTree = "<group>"; };
+		555DF5BC21E8D15A008BF9F5 /* TLReactViewVisitableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLReactViewVisitableController.swift; sourceTree = "<group>"; };
+		5565860A2293EF9100BC00DD /* TLCustomizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCustomizerViewModel.swift; sourceTree = "<group>"; };
+		5565860B2293EF9100BC00DD /* TLCustomizerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCustomizerCell.swift; sourceTree = "<group>"; };
+		5565860C2293EF9100BC00DD /* TLTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLTabBar.swift; sourceTree = "<group>"; };
+		5565860D2293EF9100BC00DD /* TLCustomizerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCustomizerViewController.swift; sourceTree = "<group>"; };
+		55CAEA03221EF1FE00B51C8B /* TLWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLWebView.swift; sourceTree = "<group>"; };
+		55CAEA05221EF29200B51C8B /* TLScriptMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLScriptMessage.swift; sourceTree = "<group>"; };
+		55CAEA1722200B7200B51C8B /* TLWebView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TLWebView.js; sourceTree = "<group>"; };
+		55FFD570222546D900B4FBF2 /* TLManager+WebViewDeletage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TLManager+WebViewDeletage.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5537D22421C158B400EA2F4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5537D21E21C158B400EA2F4D = {
+			isa = PBXGroup;
+			children = (
+				55CAEA1622200B7200B51C8B /* Resources */,
+				5537D26021C1677C00EA2F4D /* Utils */,
+				5537D25921C1677400EA2F4D /* TLViewController */,
+				5537D25021C1676D00EA2F4D /* TLManager */,
+				556586092293EF9100BC00DD /* Tabbar */,
+				5537D23B21C1672E00EA2F4D /* CustomTurboLinks */,
+				5537D26721C167F400EA2F4D /* RNTLWebView-Bridging-Header.h */,
+				5537D35121C2A72600EA2F4D /* RNTLManagerBridge.m */,
+				5537D22821C158B400EA2F4D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5537D22821C158B400EA2F4D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5537D22721C158B400EA2F4D /* libRNTLWebView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5537D23B21C1672E00EA2F4D /* CustomTurboLinks */ = {
+			isa = PBXGroup;
+			children = (
+				5537D23C21C1672E00EA2F4D /* TurbolinksRoute.swift */,
+				5537D23D21C1672E00EA2F4D /* TurbolinksMenuItem.swift */,
+				5537D23E21C1672E00EA2F4D /* TurbolinksSession.swift */,
+			);
+			path = CustomTurboLinks;
+			sourceTree = "<group>";
+		};
+		5537D25021C1676D00EA2F4D /* TLManager */ = {
+			isa = PBXGroup;
+			children = (
+				5537D25321C1676D00EA2F4D /* TLManager.swift */,
+				5537D25121C1676D00EA2F4D /* TLManager+Tabbar.swift */,
+				5537D25221C1676D00EA2F4D /* TLManager+SessionDelegate.swift */,
+				55FFD570222546D900B4FBF2 /* TLManager+WebViewDeletage.swift */,
+				5537D25421C1676D00EA2F4D /* TLNavigationController.swift */,
+			);
+			path = TLManager;
+			sourceTree = "<group>";
+		};
+		5537D25921C1677400EA2F4D /* TLViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5537D25B21C1677400EA2F4D /* TLViewController.swift */,
+				555DF5BC21E8D15A008BF9F5 /* TLReactViewVisitableController.swift */,
+				555DF5BB21E8D15A008BF9F5 /* SimpleFadeAnimator.swift */,
+				55CAEA03221EF1FE00B51C8B /* TLWebView.swift */,
+				55CAEA05221EF29200B51C8B /* TLScriptMessage.swift */,
+			);
+			path = TLViewController;
+			sourceTree = "<group>";
+		};
+		5537D26021C1677C00EA2F4D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5537D26121C1677C00EA2F4D /* String+Extension.swift */,
+				5537D26221C1677C00EA2F4D /* EdgeInsetLabel.swift */,
+				5537D26321C1677C00EA2F4D /* CustomViewController.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		556586092293EF9100BC00DD /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				5565860A2293EF9100BC00DD /* TLCustomizerViewModel.swift */,
+				5565860B2293EF9100BC00DD /* TLCustomizerCell.swift */,
+				5565860C2293EF9100BC00DD /* TLTabBar.swift */,
+				5565860D2293EF9100BC00DD /* TLCustomizerViewController.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		55CAEA1622200B7200B51C8B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55CAEA1722200B7200B51C8B /* TLWebView.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5537D22621C158B400EA2F4D /* RNTLWebView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5537D22E21C158B400EA2F4D /* Build configuration list for PBXNativeTarget "RNTLWebView" */;
+			buildPhases = (
+				5537D22321C158B400EA2F4D /* Sources */,
+				5537D22421C158B400EA2F4D /* Frameworks */,
+				55CAEA0A221F074E00B51C8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNTLWebView;
+			productName = RNTLWebView;
+			productReference = 5537D22721C158B400EA2F4D /* libRNTLWebView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5537D21F21C158B400EA2F4D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Faria;
+				TargetAttributes = {
+					5537D22621C158B400EA2F4D = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 5537D22221C158B400EA2F4D /* Build configuration list for PBXProject "RNTLWebView" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5537D21E21C158B400EA2F4D;
+			productRefGroup = 5537D22821C158B400EA2F4D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5537D22621C158B400EA2F4D /* RNTLWebView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55CAEA0A221F074E00B51C8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55CAEA1822200B7200B51C8B /* TLWebView.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5537D22321C158B400EA2F4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55FFD571222546D900B4FBF2 /* TLManager+WebViewDeletage.swift in Sources */,
+				5537D24021C1672E00EA2F4D /* TurbolinksMenuItem.swift in Sources */,
+				555DF5BD21E8D15A008BF9F5 /* SimpleFadeAnimator.swift in Sources */,
+				55CAEA06221EF29200B51C8B /* TLScriptMessage.swift in Sources */,
+				5537D25821C1676D00EA2F4D /* TLNavigationController.swift in Sources */,
+				55CAEA04221EF1FE00B51C8B /* TLWebView.swift in Sources */,
+				556586112293EF9100BC00DD /* TLCustomizerViewController.swift in Sources */,
+				5537D25721C1676D00EA2F4D /* TLManager.swift in Sources */,
+				5537D23F21C1672E00EA2F4D /* TurbolinksRoute.swift in Sources */,
+				555DF5BE21E8D15A008BF9F5 /* TLReactViewVisitableController.swift in Sources */,
+				5537D25521C1676D00EA2F4D /* TLManager+Tabbar.swift in Sources */,
+				556586102293EF9100BC00DD /* TLTabBar.swift in Sources */,
+				5537D24121C1672E00EA2F4D /* TurbolinksSession.swift in Sources */,
+				5537D35221C2A72600EA2F4D /* RNTLManagerBridge.m in Sources */,
+				5537D26421C1677C00EA2F4D /* String+Extension.swift in Sources */,
+				5537D26621C1677C00EA2F4D /* CustomViewController.swift in Sources */,
+				5565860F2293EF9100BC00DD /* TLCustomizerCell.swift in Sources */,
+				5537D26521C1677C00EA2F4D /* EdgeInsetLabel.swift in Sources */,
+				5537D25E21C1677400EA2F4D /* TLViewController.swift in Sources */,
+				5537D25621C1676D00EA2F4D /* TLManager+SessionDelegate.swift in Sources */,
+				5565860E2293EF9100BC00DD /* TLCustomizerViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5537D22C21C158B400EA2F4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5537D22D21C158B400EA2F4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5537D22F21C158B400EA2F4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6U325Z8W3G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNTLWebView-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5537D23021C158B400EA2F4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6U325Z8W3G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RNTLWebView-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5537D22221C158B400EA2F4D /* Build configuration list for PBXProject "RNTLWebView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5537D22C21C158B400EA2F4D /* Debug */,
+				5537D22D21C158B400EA2F4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5537D22E21C158B400EA2F4D /* Build configuration list for PBXNativeTarget "RNTLWebView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5537D22F21C158B400EA2F4D /* Debug */,
+				5537D23021C158B400EA2F4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5537D21F21C158B400EA2F4D /* Project object */;
+}

@@ -1,0 +1,23 @@
+{
+    "version": "1.0.0",
+    "name": "react-native-tlmanager",
+    "description": "Turbolink WebView manager for react-native",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/adanmayer/react-native-tlmanager"
+    },
+    "license": "MIT",
+    "main": "./index.tsx",
+    "keywords": [
+        "react-component",
+        "react-native",
+        "ios",
+        "android",
+        "turbolink"
+    ],
+    "peerDependencies": {
+        "react-native": "^0.57.0",
+        "react-native-swift": "^1.2.1"
+    },
+    "nativePackage": true
+}
