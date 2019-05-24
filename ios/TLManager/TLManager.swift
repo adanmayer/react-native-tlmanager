@@ -329,8 +329,16 @@ public class TLManager : RCTEventEmitter {
     
     @objc public func backTo(_ route: Dictionary<AnyHashable, Any>) {
         let tRoute = TurbolinksRoute(route)
-        let idx = navigation.viewControllers.lastIndex { (vc) -> Bool in
+        var idx = navigation.viewControllers.lastIndex { (vc) -> Bool in
             return ((vc as? TLViewController)?.visitableURL.absoluteString == tRoute.url?.absoluteString)
+        }
+
+        // check if all subsequent views share the same route
+        if (idx != nil) && (idx != navigation.viewControllers.count-1) {
+            if (navigation.viewControllers[idx!..<(navigation.viewControllers.count-1)].firstIndex{ (vc) -> Bool in
+                return ((vc as? TLViewController)?.visitableURL.absoluteString.contains(tRoute.url?.absoluteString ?? "_") == false) } != nil) {
+                idx = nil
+            }
         }
         
         if (idx != nil) {
