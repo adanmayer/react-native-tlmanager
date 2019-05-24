@@ -126,7 +126,7 @@ open class TLViewController: CustomViewController, Visitable {
     
     open override func viewDidAppear(_ animated: Bool) {
         super .viewDidAppear(animated)
-
+        
         visitableDelegate?.visitableViewDidAppear(self)
     }
 	
