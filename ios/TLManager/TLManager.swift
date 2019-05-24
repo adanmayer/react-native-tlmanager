@@ -23,8 +23,8 @@ public protocol TLManagerAppDelegate {
     
     func executeActionWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: (() -> Void)?) -> Bool
 
-    func startupPath() -> String?
-
+    func visitStartupURL()
+    func assignStartupURL(_ url: URL?)
     // if different targets are implemented
     func injectJavaScriptWithTarget(_ target: String,script: String,resolve: @escaping ((Any?) -> Swift.Void),reject: @escaping ((String, String?, Error?) -> Swift.Void))
     
@@ -246,15 +246,16 @@ public class TLManager : RCTEventEmitter {
         isAppActive = true
         // after becoming active again reload page
         DispatchQueue.main.async {
-            if let visitableView = self.navSession.topmostVisitable {
-                visitableView.visitableView.hideScreenshot()
+//            if let visitableView = self.navSession.topmostVisitable {
+//                visitableView.visitableView.hideScreenshot()
 //                // refresh, if more than x Seconds have passed since last activation
 //                if NSDate().timeIntervalSince(((self.lastActivation ?? NSDate()) as Date)) > 5 {
 //                    visitableView.reloadVisitable()
 //                } else {
 //                    visitableView.visitableView.hideScreenshot()
 //                }
-            }
+//            }
+            self.sendEvent(withName: "turbolinksAppBecomeActive", body: {})
         }
     }
 
@@ -263,9 +264,13 @@ public class TLManager : RCTEventEmitter {
         isAppActive = false
         
         // after becoming active again reload page
-        if let visitableView = self.navSession.topmostVisitable {
-            visitableView.visitableView.updateScreenshot()
-            visitableView.visitableView.showScreenshot()
+//        if let visitableView = self.navSession.topmostVisitable {
+//            visitableView.visitableView.updateScreenshot()
+//            visitableView.visitableView.showScreenshot()
+//        }
+        
+        DispatchQueue.main.async {
+            self.sendEvent(withName: "turbolinksAppResignActive", body: {})
         }
     }
     
@@ -471,6 +476,7 @@ public class TLManager : RCTEventEmitter {
     
     @objc public func visit(_ route: Dictionary<AnyHashable, Any>) {
         let tRoute = TurbolinksRoute(route)
+        
         if (self.baseURLString != nil) && (tRoute.url?.absoluteString.starts(with: "/") ?? false ) {
             tRoute.url = URL.init(string: "\(self.baseURLString!)\(tRoute.url!.absoluteString)" )
         }
@@ -618,11 +624,12 @@ public class TLManager : RCTEventEmitter {
     func handleVisitCompleted(_ URL: URL) {
         appDelegate.visitCompleted(self, url: URL)
         
-        // refresh statusbar
+        sendEvent(withName: "turbolinksVisitCompleted", body: ["href": URL.absoluteString, "path": URL.path])
+
         if (self.initialRequest) {
             self.initialRequest = false
+            appDelegate.visitStartupURL();
         }
-        sendEvent(withName: "turbolinksVisitCompleted", body: ["href": URL.absoluteString, "path": URL.path])
     }
     
     override public static func requiresMainQueueSetup() -> Bool {
@@ -660,7 +667,7 @@ public class TLManager : RCTEventEmitter {
         return ["turbolinksVisit", "turbolinksVisitCompleted", "turbolinksRedirect", "turbolinksMessage", "turbolinksError",
                 "turbolinksTitlePress", "turbolinksExecuteAction",
                 "turbolinksSessionFinished", "turbolinksViewMounted", "turbolinksShowMenu",
-                "turbolinksActiveTabItemsChanged", "turbolinksUnmount"]
+                "turbolinksActiveTabItemsChanged", "turbolinksAppBecomeActive", "turbolinksAppResignActive", "turbolinksUnmount"]
     }
 }
 
