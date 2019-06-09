@@ -610,8 +610,8 @@ public class TLManager : RCTEventEmitter {
     public func defaultPostprocessingForResponse(_ response: WKNavigationResponse) -> Bool {
         return self.appDelegate.doPostprocessingForResponse(self, response: response)
     }
-    
-    public func forwardAction(data: Dictionary<String, AnyObject>) {
+	
+    public func executeAction(data: Dictionary<String, AnyObject>) {
         DispatchQueue.main.async {
             self.sendEvent(withName: "turbolinksExecuteAction", body: data)
         }
