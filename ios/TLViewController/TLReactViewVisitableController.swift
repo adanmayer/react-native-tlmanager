@@ -85,6 +85,12 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         super.viewWillAppear(animated)
     }
     
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // we are finished rendering because we are using a RNVisitableView
+        visitableDidRender()
+    }
+    
     // MARK: Visitable View
     
     open private(set) lazy var visitableView: VisitableView! = {
@@ -97,7 +103,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     // MARK: Visitable
     
     open func visitableDidRender() {
-        // do nothing
+        manager.handleVisitCompleted(self.visitableURL)
     }
     
     open func didRedirect(to: URL) {
