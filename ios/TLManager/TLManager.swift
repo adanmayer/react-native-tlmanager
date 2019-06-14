@@ -244,6 +244,7 @@ public class TLManager : RCTEventEmitter {
     
     @objc func didBecomeActive() {
         isAppActive = true
+        
         // after becoming active again reload page
         DispatchQueue.main.async {
 //            if let visitableView = self.navSession.topmostVisitable {
@@ -262,7 +263,8 @@ public class TLManager : RCTEventEmitter {
     @objc func willResignActive() {
         lastActivation = NSDate()
         isAppActive = false
-        
+
+        resignFocusInWebView()
         // after becoming active again reload page
 //        if let visitableView = self.navSession.topmostVisitable {
 //            visitableView.visitableView.updateScreenshot()
