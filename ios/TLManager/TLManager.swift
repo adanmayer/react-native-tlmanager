@@ -482,18 +482,19 @@ public class TLManager : RCTEventEmitter {
         if (self.baseURLString != nil) && (tRoute.url?.absoluteString.starts(with: "/") ?? false ) {
             tRoute.url = URL.init(string: "\(self.baseURLString!)\(tRoute.url!.absoluteString)" )
         }
-        if (tRoute.url != nil) {
-            selectTabBarItemWith(url: tRoute.url!)
-        }
-        if (tRoute.popToRoot == true) {
-            popToRoot()
-        }
-        
-        if (tRoute.url?.host == "ReactNative.executeAction") {
-            self.defaultExecuteActionWithData(tRoute.url!.params())
-        } else {
-            self.presentVisitableForSession(tRoute)
-        }
+		
+		if (tRoute.url != nil) {
+			selectTabBarItemWith(url: tRoute.url!)
+		}
+		if (tRoute.popToRoot == true) {
+			popToRoot()
+		}
+
+		if (tRoute.url?.host == "ReactNative.executeAction") {
+			self.defaultExecuteActionWithData(tRoute.url!.params())
+		} else {
+			self.presentVisitableForSession(tRoute)
+		}
     }
 
     @objc public func injectJavaScript(_ script: String,_ resolve: @escaping ((Any?) -> Swift.Void),_ reject: @escaping ((String, String?, Error?) -> Swift.Void)) {
@@ -529,10 +530,16 @@ public class TLManager : RCTEventEmitter {
         if (route.url?.host == "ReactNative.local") {
             visitable = TLReactViewVisitableController(self, route)
         } else {
-            // let appDelegate handle presentation for view controller, if implemented
-            if !appDelegate.presentVisitableForSession(self, route) {
-                visitable = TLViewController(self, route: route)
-            }
+			let isExternalUrl = (route.url != nil) && (self.getBaseURLString() != nil) && !(route.url!.absoluteString.starts(with:self.getBaseURLString()!))
+			if isExternalUrl {
+				session(self.navSession, openExternalURL: route.url!)
+				return
+			} else {
+				// let appDelegate handle presentation for view controller, if implemented
+				if !appDelegate.presentVisitableForSession(self, route) {
+					visitable = TLViewController(self, route: route)
+				}
+			}
         }
         
         if let visitable = visitable {
