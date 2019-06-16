@@ -5,7 +5,7 @@
 //  Created by Alexander Danmayer on 26.02.19.
 //  Copyright © 2019 Faria. All rights reserved.
 //
-
+import WebKit
 import Turbolinks
 
 extension TLManager: MsgBridgeDelegate {

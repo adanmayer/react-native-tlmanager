@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WebKit
 import Turbolinks
 
 class RNVisitableView: VisitableView {

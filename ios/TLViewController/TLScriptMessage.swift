@@ -1,3 +1,5 @@
+import WebKit
+
 enum TLScriptMessageName: String {
     case ClientInitialized = "clientInitialized"
     case ExecuteAction     = "executeAction"
