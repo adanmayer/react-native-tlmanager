@@ -74,12 +74,12 @@ extension TLManagerAppDelegate {
 }
 
 let fallbackLocale = ["menu": "Menu",
-                      "menu-customization": "Menu customization",
+                      "menu-customization": "Menu Layout",
                       "done": "Done",
-                      "menu-tabs": "Menu Tabs",
-                      "drag-info": "Drag the icons to organize your own bottom menu",
-                      "menu-reset-default": "Reset to Default Menu",
-                      "confirm-customization": "This will discard your recent changes to the bottom menu",
+                      "menu-tabs": "Available Menu Options",
+                      "drag-info": "Drag and drop Menu Options to customize your preferred menu layout.",
+                      "menu-reset-default": "Reset Default Menu Layout",
+                      "confirm-customization": "This will discard your recent changes to the menu layout",
                       "accountScreenTitle": "Account"]
 
 struct ActionButtonDimensions {
