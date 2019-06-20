@@ -70,6 +70,8 @@ class TLCustomizerFooterView : UIView {
             title = UILabel.init(frame: CGRect(origin: .zero, size: frame.size))
             title.textAlignment = .left
             title.adjustsFontSizeToFitWidth = false
+			title.lineBreakMode = .byWordWrapping
+			title.numberOfLines = 0
             title.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             title.textColor = UIColor.gray
             title.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +79,8 @@ class TLCustomizerFooterView : UIView {
             
             NSLayoutConstraint.activate([
                 title.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
-                title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15)])
+                title.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15),
+				title.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15)])
         }
     }
 }

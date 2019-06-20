@@ -55,13 +55,18 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     
     open weak var visitableDelegate: VisitableDelegate?
     open var visitableURL: URL!
+	open var moduleURL: URL!
     
     let moduleName: String!
-    
+	
+	class func getPathFor(moduleName: String) -> String {
+		return "https://ReactNative.local/\(moduleName)"
+	}
+	
     init(_ manager: TLManager, _ route: TurbolinksRoute) {
         self.moduleName = route.url!.lastPathComponent
         self.visitableURL = URL.init(string: "about:blank")
-        
+        self.moduleURL = URL.init(string: TLReactViewVisitableController.getPathFor(moduleName: self.moduleName))
         super.init(manager: manager)
         
         self.title = TLManager.i18NItem("\(moduleName!)Title")
@@ -104,7 +109,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     // MARK: Visitable
     
     open func visitableDidRender() {
-        manager.handleVisitCompleted(self.visitableURL)
+        manager.handleVisitCompleted(moduleURL)
     }
     
     open func didRedirect(to: URL) {

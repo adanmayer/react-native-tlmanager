@@ -373,7 +373,7 @@ public class TLManager : RCTEventEmitter {
         
         if self.navigation.topViewController is TLViewController {
             self.visit(["title": route["title"] ?? "",
-                        "href": "https://ReactNative.local/\(moduleName)",
+                        "href": TLReactViewVisitableController.getPathFor(moduleName: moduleName),
                         "action": route["action"] ?? "advance",
                         "actionButtons" : (route["actionButtons"] ?? [:])])
         }
