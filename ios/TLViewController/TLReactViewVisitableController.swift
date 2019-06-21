@@ -85,20 +85,16 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     open override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = (self.navigationController!.viewControllers.count <= 1)
         super.viewWillAppear(animated)
-    }
-    
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
         let rootView = RCTRootView(bridge: manager.bridge,
                                    moduleName: moduleName,
                                    initialProperties: nil)
-        UIView.animate(withDuration: 0.2, animations: {
-            self.view = rootView
-        }, completion: { (finished) in
-            // we are finished rendering because we are using a RNVisitableView
-            self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path])
-        })
+        self.view = rootView
+        self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path])
+    }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
