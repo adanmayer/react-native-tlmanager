@@ -24,6 +24,8 @@ export enum TLEventNames {
     ActiveTabItemsChanged = "turbolinksActiveTabItemsChanged",
     AppBecomeActive = "turbolinksAppBecomeActive",
     AppResignActive = "turbolinksAppResignActive",
+    RNViewAppear = "turbolinksRNViewAppear",
+    RNViewDisappear = "turbolinksRNViewDisappear",
     Unmount = "turbolinksUnmount",
 }
 

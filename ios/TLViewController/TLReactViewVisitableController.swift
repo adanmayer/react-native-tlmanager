@@ -94,7 +94,12 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // we are finished rendering because we are using a RNVisitableView
-        visitableDidRender()
+        manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
     }
     
     // MARK: Visitable View
@@ -109,7 +114,8 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     // MARK: Visitable
     
     open func visitableDidRender() {
-        manager.handleVisitCompleted(moduleURL)
+        //manager.sendEvent(withName: "turbolinksVisitCompleted", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
+        //manager.handleVisitCompleted(moduleURL)
     }
     
     open func didRedirect(to: URL) {

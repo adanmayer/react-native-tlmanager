@@ -524,13 +524,17 @@ public class TLManager : RCTEventEmitter {
     }
 
     fileprivate func presentVisitableForSession(_ route: TurbolinksRoute) {
-        resignFocusInWebView()
-        
         var visitable: (UIViewController & Visitable)? = nil
         if (route.url?.host == "ReactNative.local") {
+            if (navigation.topViewController is TLReactViewVisitableController) {
+                if ((navigation.topViewController as! TLReactViewVisitableController).moduleName == route.url!.lastPathComponent) {
+                    return
+                }
+            }
             visitable = TLReactViewVisitableController(self, route)
         } else {
-			let isExternalUrl = (route.url != nil) && (self.getBaseURLString() != nil) && !(route.url!.absoluteString.starts(with:self.getBaseURLString()!))
+            resignFocusInWebView()
+            let isExternalUrl = (route.url != nil) && (self.getBaseURLString() != nil) && !(route.url!.absoluteString.starts(with:self.getBaseURLString()!))
 			if isExternalUrl {
 				session(self.navSession, openExternalURL: route.url!)
 				return
@@ -553,7 +557,9 @@ public class TLManager : RCTEventEmitter {
                     navigation.pushViewController(visitable, animated: false)
                 }
             }
-            navSession.visit(visitable)
+            if !(visitable is TLReactViewVisitableController) {
+                navSession.visit(visitable)
+            }
         }
     }
     
@@ -676,7 +682,9 @@ public class TLManager : RCTEventEmitter {
         return ["turbolinksVisit", "turbolinksVisitCompleted", "turbolinksRedirect", "turbolinksMessage", "turbolinksError",
                 "turbolinksTitlePress", "turbolinksExecuteAction",
                 "turbolinksSessionFinished", "turbolinksViewMounted", "turbolinksShowMenu",
-                "turbolinksActiveTabItemsChanged", "turbolinksAppBecomeActive", "turbolinksAppResignActive", "turbolinksUnmount"]
+                "turbolinksActiveTabItemsChanged", "turbolinksAppBecomeActive", "turbolinksAppResignActive",
+                "turbolinksRNViewAppear", "turbolinksRNViewDisappear",
+                "turbolinksUnmount"]
     }
 }
 
