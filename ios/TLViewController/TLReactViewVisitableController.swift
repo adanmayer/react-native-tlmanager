@@ -72,11 +72,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         self.title = TLManager.i18NItem("\(moduleName!)Title")
         self.edgesForExtendedLayout = [];
 
-        let rootView = RCTRootView(bridge: manager.bridge,
-                           moduleName: moduleName,
-                           initialProperties: nil)
         self.view.backgroundColor = UIColor.clear
-        self.view = rootView
         
         self.assignMenuButton(route.leftButton)
         self.assignActionButtons(route.actionButtons)
@@ -93,13 +89,27 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // we are finished rendering because we are using a RNVisitableView
-        manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
+
+        let rootView = RCTRootView(bridge: manager.bridge,
+                                   moduleName: moduleName,
+                                   initialProperties: nil)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view = rootView
+        }, completion: { (finished) in
+            // we are finished rendering because we are using a RNVisitableView
+            self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path])
+        })
     }
     
-    open override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        let view = UIView.init()
+        view.backgroundColor = UIColor.white
+        self.view = view
+        
         manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
+
     }
     
     // MARK: Visitable View
