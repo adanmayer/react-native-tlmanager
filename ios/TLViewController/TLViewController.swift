@@ -132,7 +132,7 @@ open class TLViewController: CustomViewController, Visitable {
 	
     @objc func navBarTapped(_ theObject: UITapGestureRecognizer){
         let pressedLocation = theObject.location(in: manager.navigation.navigationBar)
-        if !manager.appDelegate.handleTitlePress(manager, URL: self.visitableURL, location: pressedLocation) {
+        if !manager.appDelegate.handleTitlePress(manager, url: self.visitableURL, location: pressedLocation) {
             manager.sendEvent(withName: "turbolinksTitlePress", body: [])
         }
     }

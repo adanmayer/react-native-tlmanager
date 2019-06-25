@@ -31,7 +31,7 @@ public protocol TLManagerAppDelegate {
     func registerGlobalSwipe() -> Bool
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer)
     
-    func handleTitlePress(_ manager: TLManager, URL: URL, location: CGPoint) -> Bool
+    func handleTitlePress(_ manager: TLManager, url: URL, location: CGPoint) -> Bool
     func updateNavigation(_ manager: TLManager, _ title: String, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?, _ subMenuData: Dictionary<AnyHashable, Any>?) -> Bool
     func presentVisitableForSession(_ manager: TLManager, _ route: TurbolinksRoute) -> Bool
 
@@ -47,7 +47,7 @@ extension TLManagerAppDelegate {
         // do nothing
     }
     
-    func handleTitlePress(_ manager: TLManager, URL: URL, location: CGPoint) -> Bool {
+    func handleTitlePress(_ manager: TLManager, url: URL, location: CGPoint) -> Bool {
         return false
     }
 
