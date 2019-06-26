@@ -270,7 +270,7 @@ public class TLManager : RCTEventEmitter {
 //            visitableView.visitableView.updateScreenshot()
 //            visitableView.visitableView.showScreenshot()
 //        }
-        
+
         DispatchQueue.main.async {
             self.sendEvent(withName: "turbolinksAppResignActive", body: {})
         }
@@ -401,6 +401,7 @@ public class TLManager : RCTEventEmitter {
         
         if let viewController = (navigation.topViewController as? TLViewController) {
             viewController.title = title
+            viewController.route.title = title
             viewController.assignActionButtons(actionButtons)
             
             _ = self.appDelegate.updateNavigation(self, title, actionButtons, options)
