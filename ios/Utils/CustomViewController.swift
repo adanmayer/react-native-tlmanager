@@ -54,7 +54,12 @@ open class CustomViewController: TLBaseViewController {
     }
     
     open func setupMenuButton() {
-        self.navigationItem.leftBarButtonItem = menuButton
+        if (menuButton != nil) {
+            self.navigationItem.leftBarButtonItem = menuButton
+        } else {
+            let spacer = UIBarButtonItem.init(image: UIImage.init(named: "empty"), style: .plain, target: nil, action: nil)
+            self.navigationItem.leftBarButtonItem = spacer
+        }
     }
 
     open func assignMenuButton(_ buttonData: Dictionary<AnyHashable, Any>?) {
