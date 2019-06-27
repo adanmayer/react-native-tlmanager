@@ -109,6 +109,7 @@ extension TLManager : UITabBarDelegate {
         tabBar?.items = items
         if (reselectMenu) {
             tabBar?.selectedItem = tabBar?.items?.last
+            fadeSelection()
         } else {
             selectTabBarItemWith(url: self.navSession.topmostVisitable?.visitableURL ?? nil)
         }
@@ -136,6 +137,14 @@ extension TLManager : UITabBarDelegate {
                 self.sendEvent(withName: "turbolinksShowMenu", body: [:])
             }
         }
+        fadeSelection()
+    }
+    
+    func fadeSelection() {
+        // hide selection again after 0.3 sec
+        UIView.animate(withDuration: 0.2, delay: 0.3, options: [.curveEaseInOut], animations: {
+            self.tabBar?.selectedItem = nil
+        }, completion: nil)
     }
     
     func tabBarItemFor(tag: Int) -> Dictionary<String, String>? {
@@ -158,7 +167,8 @@ extension TLManager : UITabBarDelegate {
                 if (url.relativePath == URL.init(string: item["href"] ?? "")?.relativePath) {
                     if let items = self.tabBar?.items {
                         if let index = tabBarActiveItems.index(of: item), (index + 1) < items.count {
-                            self.tabBar?.selectedItem = items[index + 1]
+                            tabBar?.selectedItem = items[index + 1]
+                            fadeSelection()
                             return;
                         }
                     }
