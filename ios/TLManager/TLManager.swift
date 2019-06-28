@@ -151,9 +151,9 @@ public class TLManager : RCTEventEmitter {
         
         if appDelegate.registerGlobalSwipe() {
             // add back gesture recognizer for back
-            swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-            swipeRight!.direction = .right
-            navigation.view.addGestureRecognizer(swipeRight!)
+            //swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
+            //swipeRight!.direction = .right
+            //navigation.view.addGestureRecognizer(swipeRight!)
             
             swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
             swipeLeft!.direction = .left
@@ -447,6 +447,9 @@ public class TLManager : RCTEventEmitter {
 
         removeFromRootViewController() // remove existing childViewController, in case of debug reloading...
         addToRootViewController(viewController)
+
+        mainNavigation().interactivePopGestureRecognizer!.isEnabled = true
+
         self.initialRequest = true
         viewMounted = true
     }
