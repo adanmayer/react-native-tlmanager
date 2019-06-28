@@ -527,6 +527,23 @@ public class TLManager : RCTEventEmitter {
         print(message)
     }
 
+    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                                        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if ((gestureRecognizer == mainNavigation().interactivePopGestureRecognizer) && otherGestureRecognizer.isKind(of: UIScreenEdgePanGestureRecognizer.self)) {
+            return true
+        }
+        return false
+    }
+    
+    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        // Go back prio if views on the stack
+        if ((gestureRecognizer == mainNavigation().interactivePopGestureRecognizer) && (mainNavigation().viewControllers.count > 1)) {
+            return true
+        }
+        return false
+    }
+
+    
     fileprivate func presentVisitableForSession(_ route: TurbolinksRoute) {
         var visitable: (UIViewController & Visitable)? = nil
         if (route.url?.host == "ReactNative.local") {
