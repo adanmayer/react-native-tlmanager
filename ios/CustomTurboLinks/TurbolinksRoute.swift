@@ -5,7 +5,7 @@ public enum RequestSource : String {
     case generic
     case tabBar
     case subMenu
-    case subMenuLink
+    case subPageLink
 }
 
 public class TurbolinksRoute {
