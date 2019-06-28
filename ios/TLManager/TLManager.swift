@@ -89,7 +89,7 @@ struct ActionButtonDimensions {
 
 
 @objc(TLManager)
-public class TLManager : RCTEventEmitter {
+public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     static var localeDictionary: Dictionary<String, String>!
     
     var lastActivation: NSDate?
@@ -449,6 +449,7 @@ public class TLManager : RCTEventEmitter {
         addToRootViewController(viewController)
 
         mainNavigation().interactivePopGestureRecognizer!.isEnabled = true
+		mainNavigation().interactivePopGestureRecognizer!.delegate = self
 
         self.initialRequest = true
         viewMounted = true
@@ -529,21 +530,13 @@ public class TLManager : RCTEventEmitter {
 
     @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                                         shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if ((gestureRecognizer == mainNavigation().interactivePopGestureRecognizer) && otherGestureRecognizer.isKind(of: UIScreenEdgePanGestureRecognizer.self)) {
+		// allow additional screenedge recognizers if navigation pop gesture is active
+		if ((gestureRecognizer == mainNavigation().interactivePopGestureRecognizer) && otherGestureRecognizer.isKind(of: UIScreenEdgePanGestureRecognizer.self)) {
             return true
         }
         return false
     }
-    
-    @objc public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        // Go back prio if views on the stack
-        if ((gestureRecognizer == mainNavigation().interactivePopGestureRecognizer) && (mainNavigation().viewControllers.count > 1)) {
-            return true
-        }
-        return false
-    }
-
-    
+	
     fileprivate func presentVisitableForSession(_ route: TurbolinksRoute) {
         var visitable: (UIViewController & Visitable)? = nil
         if (route.url?.host == "ReactNative.local") {
