@@ -82,6 +82,7 @@ export interface TabBarConfig {
     items: TabBarEntries,
     activeItems: Array<string>,
     defaultItems: Array<string>
+    selectedItem?: string
 }
 
 export interface TLRoute {

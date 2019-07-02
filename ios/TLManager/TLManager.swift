@@ -413,6 +413,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
            let activeItems = tabBarConfig["activeItems"] as? Array<String>,
            let defaultItems = tabBarConfig["defaultItems"] as? Array<String> {
 			addTabBarView(toView: navigation!.view!)
+            let selectedItem = tabBarConfig["selectedItem"] as? String
 			menuIcon = (tabBarConfig["menuIcon"] as? String) ?? "defaultMenuIcon"
 			tabBarItems = items.map({
 							["id": $0["id"] as! String,
@@ -420,7 +421,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 							 "title": $0["title"] as? String ?? "",
 							 "icon": $0["icon"] as? String ?? "",
 							 "badgeValue": $0["badgeValue"] as? String ?? ($0["badgeValue"] as? NSNumber)?.stringValue ?? ""]})
-			initTabbar(activeIds: activeItems, defaultIds: defaultItems)
+            initTabbar(activeIds: activeItems, defaultIds: defaultItems, selectedItem: selectedItem)
 		} else {
 			self.removeTabBar()
 		}

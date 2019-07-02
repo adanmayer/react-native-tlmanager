@@ -22,6 +22,19 @@ extension TLManager : UITabBarDelegate {
         }
     }
     
+    public func selectTabBarItem(_ selectedItem: String) {
+        // set highlight
+        if let item = tabBarActiveItems.first(where: {$0["id"] == selectedItem}) {
+            if let idx = tabBarActiveItems.firstIndex(of: item),
+                let tabBar = self.tabBar, (idx < tabBar.items!.count - 1) {
+                tabBar.selectedItem = tabBar.items![idx + 1]
+                return;
+            }
+        }
+        // select Menu by default
+        tabBar?.selectedItem = tabBar?.items?.first
+    }
+    
     func addTabBarView(toView view: UIView) {
         if (tabBar == nil) {
             tabBar = TLTabBar(frame: .zero)
@@ -55,12 +68,12 @@ extension TLManager : UITabBarDelegate {
         }
     }
     
-    func initTabbar(activeIds: Array<String>, defaultIds: Array<String>) {
-        updateTabbar(activeIds: activeIds, defaultIds: defaultIds)
+    func initTabbar(activeIds: Array<String>, defaultIds: Array<String>, selectedItem: String?) {
+        updateTabbar(activeIds: activeIds, defaultIds: defaultIds, selectedItem: selectedItem)
         tabBar?.delegate = self
     }
     
-    func updateTabbar(activeIds: Array<String>, defaultIds: Array<String>) {
+    func updateTabbar(activeIds: Array<String>, defaultIds: Array<String>, selectedItem: String?) {
         var items = [Dictionary<String, String>]()
         for (id) in defaultIds {
             if let data = tabBarItemFor(id: id) {
@@ -90,6 +103,11 @@ extension TLManager : UITabBarDelegate {
         
         tabBarActiveItems = items
         updateTabBarItems()
+
+        // set highlight
+        if let selectedItem = selectedItem {
+            selectTabBarItem(selectedItem)
+        }
     }
     
     func updateTabBarItems() {
@@ -109,7 +127,6 @@ extension TLManager : UITabBarDelegate {
         tabBar?.items = items
         if (reselectMenu) {
             tabBar?.selectedItem = tabBar?.items?.last
-            fadeSelection()
         } else {
             selectTabBarItemWith(url: self.navSession.topmostVisitable?.visitableURL ?? nil)
         }
@@ -137,7 +154,6 @@ extension TLManager : UITabBarDelegate {
                 self.sendEvent(withName: "turbolinksShowMenu", body: [:])
             }
         }
-        fadeSelection()
     }
     
     func fadeSelection() {
@@ -168,7 +184,6 @@ extension TLManager : UITabBarDelegate {
                     if let items = self.tabBar?.items {
                         if let index = tabBarActiveItems.index(of: item), (index + 1) < items.count {
                             tabBar?.selectedItem = items[index + 1]
-                            fadeSelection()
                             return;
                         }
                     }

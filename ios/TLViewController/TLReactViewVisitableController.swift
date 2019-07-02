@@ -60,7 +60,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     let moduleName: String!
 	
 	class func getPathFor(moduleName: String) -> String {
-		return "https://ReactNative.local/\(moduleName)"
+		return "RN://ReactNative.local/\(moduleName)"
 	}
 	
     init(_ manager: TLManager, _ route: TurbolinksRoute) {
