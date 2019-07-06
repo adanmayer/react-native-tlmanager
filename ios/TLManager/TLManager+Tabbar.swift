@@ -194,8 +194,8 @@ extension TLManager : UITabBarDelegate {
                     }
                 }
             }
-            // dummy loading => menu
-            if (url.absoluteString != "about:blank") {
+            // local views => menu
+			if (url.absoluteString.starts(with: "RN://ReactNative.local/")) {
                 tabBar?.selectedItem = tabBar?.items?.first
             }
         }
