@@ -24,15 +24,20 @@ extension TLManager : UITabBarDelegate {
     
     public func selectTabBarItem(_ selectedItem: String) {
         // set highlight
-        if let item = tabBarActiveItems.first(where: {$0["id"] == selectedItem}) {
-            if let idx = tabBarActiveItems.firstIndex(of: item),
-                let tabBar = self.tabBar, (idx < tabBar.items!.count - 1) {
-                tabBar.selectedItem = tabBar.items![idx + 1]
-                return;
-            }
-        }
-        // select Menu by default
-        tabBar?.selectedItem = tabBar?.items?.first
+		if let tabBar = self.tabBar, let _ = tabBar.items {
+			if let item = tabBarActiveItems.first(where: {$0["id"] == selectedItem}) {
+				if let idx = tabBarActiveItems.firstIndex(of: item),
+					(idx < tabBar.items!.count - 1) {
+					tabBar.selectedItem = tabBar.items![idx + 1]
+					return;
+				}
+			}
+			// select Menu by default
+			tabBar.selectedItem = nil
+			if (tabBar.items!.count > 0) {
+				tabBar.selectedItem = tabBar.items!.first
+			}
+		}
     }
     
     func addTabBarView(toView view: UIView) {
@@ -126,7 +131,7 @@ extension TLManager : UITabBarDelegate {
         let reselectMenu = (tabBar?.selectedItem?.tag == -1)
         tabBar?.items = items
         if (reselectMenu) {
-            tabBar?.selectedItem = tabBar?.items?.last
+            tabBar?.selectedItem = tabBar?.items?.first
         } else {
             selectTabBarItemWith(url: self.navSession.topmostVisitable?.visitableURL ?? nil)
         }
@@ -189,9 +194,9 @@ extension TLManager : UITabBarDelegate {
                     }
                 }
             }
-            // ignore dummy loading
+            // dummy loading => menu
             if (url.absoluteString != "about:blank") {
-                tabBar?.selectedItem = nil
+                tabBar?.selectedItem = tabBar?.items?.first
             }
         }
     }
