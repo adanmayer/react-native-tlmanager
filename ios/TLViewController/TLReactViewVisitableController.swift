@@ -90,7 +90,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
                                    moduleName: moduleName,
                                    initialProperties: nil)
         self.view = rootView
-        self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path])
+        self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path, "title": self.title ?? ""])
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -104,8 +104,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         view.backgroundColor = UIColor.white
         self.view = view
         
-        manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
-
+		manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path, "title": self.title ?? ""])
     }
     
     // MARK: Visitable View
