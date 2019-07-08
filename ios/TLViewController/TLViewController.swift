@@ -83,7 +83,7 @@ open class TLViewController: CustomViewController, Visitable {
         }
     }
     
-    open func updateScrollViewInsets() {
+    open func updateScrollViewInsets(_ forced: Bool = false) {
         // do necessary scroll inset updates here
     }
     
