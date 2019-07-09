@@ -15,14 +15,10 @@
 		5537D25721C1676D00EA2F4D /* TLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25321C1676D00EA2F4D /* TLManager.swift */; };
 		5537D25821C1676D00EA2F4D /* TLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25421C1676D00EA2F4D /* TLNavigationController.swift */; };
 		5537D25E21C1677400EA2F4D /* TLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D25B21C1677400EA2F4D /* TLViewController.swift */; };
-		5537D26421C1677C00EA2F4D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D26121C1677C00EA2F4D /* String+Extension.swift */; };
-		5537D26521C1677C00EA2F4D /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D26221C1677C00EA2F4D /* EdgeInsetLabel.swift */; };
 		5537D26621C1677C00EA2F4D /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537D26321C1677C00EA2F4D /* CustomViewController.swift */; };
 		5537D35221C2A72600EA2F4D /* RNTLManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5537D35121C2A72600EA2F4D /* RNTLManagerBridge.m */; };
 		555DF5BD21E8D15A008BF9F5 /* SimpleFadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DF5BB21E8D15A008BF9F5 /* SimpleFadeAnimator.swift */; };
 		555DF5BE21E8D15A008BF9F5 /* TLReactViewVisitableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DF5BC21E8D15A008BF9F5 /* TLReactViewVisitableController.swift */; };
-		5565860E2293EF9100BC00DD /* TLCustomizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860A2293EF9100BC00DD /* TLCustomizerViewModel.swift */; };
-		5565860F2293EF9100BC00DD /* TLCustomizerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860B2293EF9100BC00DD /* TLCustomizerCell.swift */; };
 		556586102293EF9100BC00DD /* TLTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860C2293EF9100BC00DD /* TLTabBar.swift */; };
 		556586112293EF9100BC00DD /* TLCustomizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5565860D2293EF9100BC00DD /* TLCustomizerViewController.swift */; };
 		55CAEA04221EF1FE00B51C8B /* TLWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CAEA03221EF1FE00B51C8B /* TLWebView.swift */; };
@@ -41,15 +37,11 @@
 		5537D25321C1676D00EA2F4D /* TLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLManager.swift; sourceTree = "<group>"; };
 		5537D25421C1676D00EA2F4D /* TLNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLNavigationController.swift; sourceTree = "<group>"; };
 		5537D25B21C1677400EA2F4D /* TLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLViewController.swift; sourceTree = "<group>"; };
-		5537D26121C1677C00EA2F4D /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		5537D26221C1677C00EA2F4D /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
 		5537D26321C1677C00EA2F4D /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		5537D26721C167F400EA2F4D /* RNTLWebView-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNTLWebView-Bridging-Header.h"; sourceTree = "<group>"; };
 		5537D35121C2A72600EA2F4D /* RNTLManagerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTLManagerBridge.m; sourceTree = SOURCE_ROOT; };
 		555DF5BB21E8D15A008BF9F5 /* SimpleFadeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleFadeAnimator.swift; sourceTree = "<group>"; };
 		555DF5BC21E8D15A008BF9F5 /* TLReactViewVisitableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLReactViewVisitableController.swift; sourceTree = "<group>"; };
-		5565860A2293EF9100BC00DD /* TLCustomizerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCustomizerViewModel.swift; sourceTree = "<group>"; };
-		5565860B2293EF9100BC00DD /* TLCustomizerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCustomizerCell.swift; sourceTree = "<group>"; };
 		5565860C2293EF9100BC00DD /* TLTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLTabBar.swift; sourceTree = "<group>"; };
 		5565860D2293EF9100BC00DD /* TLCustomizerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLCustomizerViewController.swift; sourceTree = "<group>"; };
 		55CAEA03221EF1FE00B51C8B /* TLWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLWebView.swift; sourceTree = "<group>"; };
@@ -129,8 +121,6 @@
 		5537D26021C1677C00EA2F4D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				5537D26121C1677C00EA2F4D /* String+Extension.swift */,
-				5537D26221C1677C00EA2F4D /* EdgeInsetLabel.swift */,
 				5537D26321C1677C00EA2F4D /* CustomViewController.swift */,
 			);
 			path = Utils;
@@ -139,8 +129,6 @@
 		556586092293EF9100BC00DD /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
-				5565860A2293EF9100BC00DD /* TLCustomizerViewModel.swift */,
-				5565860B2293EF9100BC00DD /* TLCustomizerCell.swift */,
 				5565860C2293EF9100BC00DD /* TLTabBar.swift */,
 				5565860D2293EF9100BC00DD /* TLCustomizerViewController.swift */,
 			);
@@ -237,13 +225,9 @@
 				556586102293EF9100BC00DD /* TLTabBar.swift in Sources */,
 				5537D24121C1672E00EA2F4D /* TurbolinksSession.swift in Sources */,
 				5537D35221C2A72600EA2F4D /* RNTLManagerBridge.m in Sources */,
-				5537D26421C1677C00EA2F4D /* String+Extension.swift in Sources */,
 				5537D26621C1677C00EA2F4D /* CustomViewController.swift in Sources */,
-				5565860F2293EF9100BC00DD /* TLCustomizerCell.swift in Sources */,
-				5537D26521C1677C00EA2F4D /* EdgeInsetLabel.swift in Sources */,
 				5537D25E21C1677400EA2F4D /* TLViewController.swift in Sources */,
 				5537D25621C1676D00EA2F4D /* TLManager+SessionDelegate.swift in Sources */,
-				5565860E2293EF9100BC00DD /* TLCustomizerViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

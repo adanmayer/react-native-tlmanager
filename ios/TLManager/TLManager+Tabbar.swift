@@ -16,7 +16,7 @@ extension TLManager : UITabBarDelegate {
     @objc public func showTabBarCustomizer() {
         if (customizerView == nil) && isTabBarDataAvailable() {
             navSession.webView.endEditing(true)
-            let viewController = TLCustomizerViewController.init(manager: self)
+            let viewController = appDelegate.getTabBarCustomizer(self)
             navigation.pushViewController(viewController, animated: true)
             customizerView = viewController
         }
@@ -42,7 +42,7 @@ extension TLManager : UITabBarDelegate {
     
     func addTabBarView(toView view: UIView) {
         if (tabBar == nil) {
-            tabBar = TLTabBar(frame: .zero)
+            tabBar = appDelegate.addAppTabBar()
             tabBar!.translatesAutoresizingMaskIntoConstraints = false
             tabBar!.items = []
             
@@ -117,17 +117,15 @@ extension TLManager : UITabBarDelegate {
     
     func updateTabBarItems() {
         var items = [UITabBarItem]()
-        if (tabBarActiveItems.count > 0) {
+        if (self.tabBar != nil) && (tabBarActiveItems.count > 0) {
             for item in tabBarActiveItems[0...min(tabBarActiveItems.count - 1, (TLTabBarMaxCount - 1))] {
-                let barItem = TLTabBar.createTabBarItem(withData: item, tag: tabBarActiveItems.firstIndex(of: item)!)
+                let barItem = self.tabBar!.createTabBarItem(withData: item, tag: tabBarActiveItems.firstIndex(of: item)!)
                 items.append(barItem)
             }
         }
-            
-        let image = (UIApplication.shared.delegate as! TLManagerAppDelegate).imageFromString(menuIcon, size: CGSize(width: TabBarItemDimensions.imageWidth, height: TabBarItemDimensions.imageHeight), fallbackAsset: nil)
-        
+
         items.insert(UITabBarItem(title: TLManager.i18NItem("menu"),
-                                  image: image, tag: -1), at:0)
+                                  image: self.tabBar?.defaultMenuBarImage(menuIcon), tag: -1), at:0)
         let reselectMenu = (tabBar?.selectedItem?.tag == -1)
         tabBar?.items = items
         if (reselectMenu) {
@@ -137,7 +135,7 @@ extension TLManager : UITabBarDelegate {
         }
     }
     
-    func restoreDefaultItems() {
+    public func restoreDefaultItems() {
         self.tabBarActiveItems = self.tabBarDefaultItems
         customizerView?.updateActiveItems(self.tabBarDefaultItems)
         updateTabBarItems()
@@ -208,8 +206,8 @@ extension TLManager : UITabBarDelegate {
         return tabBarActiveItems[index]
     }
     
-    func assignTabBarItem(item: Dictionary<String, String>, atIndex index: Int) {
-        if let itemData = tabBarItemFor(id: item["id"]!) {
+    public func assignTabBarItem(item: Dictionary<String, String>, atIndex index: Int) {
+        if let itemData = tabBarItemFor(id: item["id"]!), (tabBar != nil) {
             // if item is already in list switch data
             if let oldIndex = tabBarActiveItems.firstIndex(of: itemData) {
                 tabBarActiveItems[oldIndex] = tabBarActiveItems[index - 1]
@@ -217,7 +215,7 @@ extension TLManager : UITabBarDelegate {
                 updateTabBarItems()
             } else {
                 var newItems = self.tabBar!.items!
-				let newItem = TLTabBar.createTabBarItem(withData: itemData, tag: index - 1)
+				let newItem = self.tabBar!.createTabBarItem(withData: itemData, tag: index - 1)
 				newItems[index] = newItem
 				tabBarActiveItems[index - 1] = itemData
                 UIView.animate(withDuration: 0.2) {

@@ -29,7 +29,11 @@ public protocol TLManagerAppDelegate {
     func injectJavaScriptWithTarget(_ target: String,script: String,resolve: @escaping ((Any?) -> Swift.Void),reject: @escaping ((String, String?, Error?) -> Swift.Void))
     
     func registerGlobalSwipe() -> Bool
+    func defaultTranslation() -> Dictionary<String, Any>
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer)
+    
+    func addAppTabBar() -> TLTabBar
+    func getTabBarCustomizer(_ manager: TLManager) -> TLCustomizerViewController
     
     func handleTitlePress(_ manager: TLManager, url: URL, location: CGPoint) -> Bool
     func updateNavigation(_ manager: TLManager, _ title: String, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?, _ subMenuData: Dictionary<AnyHashable, Any>?) -> Bool
@@ -67,20 +71,32 @@ extension TLManagerAppDelegate {
         return false
     }
     
+    func addAppTabBar() -> TLTabBar {
+        return TLTabBar(frame: .zero)
+    }
+    
+    func getTabBarCustomizer(_ manager: TLManager) -> TLCustomizerViewController {
+        return TLCustomizerViewController.init(manager: manager)
+    }
+    
+    func defaultTranslation() -> Dictionary<String, Any> {
+        // return fallback translations
+        return  ["done": "Done",
+                 "cancel": "Cancel",
+                 "menu-customizer": ["menu": "Menu",
+                                     "menu-customization": "Customize menu",
+                                     "menu-tabs": "Available Menu items",
+                                     "drag-info": "Drag and drop Menu Items to customize your preferred menu.",
+                                     "menu-reset-default": "Reset Default Menu",
+                                     "confirm-customization": "This will discard your recent changes."]
+                ]
+    }
+
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer) {
         // do nothing
     }
     
 }
-
-let fallbackLocale = ["menu": "Menu",
-                      "menu-customization": "Menu Layout",
-                      "done": "Done",
-                      "menu-tabs": "Available Menu Options",
-                      "drag-info": "Drag and drop Menu Options to customize your preferred menu layout.",
-                      "menu-reset-default": "Reset Default Menu Layout",
-                      "confirm-customization": "This will discard your recent changes to the menu layout",
-                      "accountScreenTitle": "Account"]
 
 struct ActionButtonDimensions {
     static let imageHeight: CGFloat =  20
@@ -90,7 +106,7 @@ struct ActionButtonDimensions {
 
 @objc(TLManager)
 public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
-    static var localeDictionary: Dictionary<String, String>!
+    static var localeDictionary: Dictionary<String, Any>!
     
     var lastActivation: NSDate?
     open var isAppActive = true
@@ -132,10 +148,11 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     func initializeViewManager(_ route: Dictionary<AnyHashable, Any>,_ options: Dictionary<AnyHashable, Any>) {
         setAppOptions(options)
         
-        if let locales = (options["locale"] as? Dictionary<String, String>) {
+        // initialise translations
+        if let locales = (options["locale"] as? Dictionary<String, Any>) {
             TLManager.localeDictionary = locales
         } else {
-            TLManager.localeDictionary = fallbackLocale
+            TLManager.localeDictionary = appDelegate.defaultTranslation()
         }
         
         self.processPool = WKProcessPool()
@@ -670,8 +687,11 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         return DispatchQueue.main
     }
     
-    static func i18NItem(_ item: String) -> String {
-        return localeDictionary[item] ?? "(\(item)!)"
+    public static func i18NItem(_ item: String) -> String {
+        if let value = (localeDictionary as NSDictionary).value(forKeyPath: item) as? String {
+            return value
+        }
+        return "(\(item)!)"
     }
     
     override public func constantsToExport() -> [AnyHashable: Any]! {
