@@ -29,7 +29,9 @@ public protocol TLManagerAppDelegate {
     func injectJavaScriptWithTarget(_ target: String,script: String,resolve: @escaping ((Any?) -> Swift.Void),reject: @escaping ((String, String?, Error?) -> Swift.Void))
     
     func registerGlobalSwipe() -> Bool
-    func defaultTranslation() -> Dictionary<String, Any>
+    func changeLocale(_ locale: String, translations: Dictionary<String, Any>?)
+    func i18NItem(_ item: String) -> String
+    
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer)
     
     func addAppTabBar() -> TLTabBar
@@ -79,19 +81,6 @@ extension TLManagerAppDelegate {
         return TLCustomizerViewController.init(manager: manager)
     }
     
-    func defaultTranslation() -> Dictionary<String, Any> {
-        // return fallback translations
-        return  ["done": "Done",
-                 "cancel": "Cancel",
-                 "menu-customizer": ["menu": "Menu",
-                                     "menu-customization": "Customize menu",
-                                     "menu-tabs": "Available Menu items",
-                                     "drag-info": "Drag and drop Menu Items to customize your preferred menu.",
-                                     "menu-reset-default": "Reset Default Menu",
-                                     "confirm-customization": "This will discard your recent changes."]
-                ]
-    }
-
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer) {
         // do nothing
     }
@@ -106,8 +95,6 @@ struct ActionButtonDimensions {
 
 @objc(TLManager)
 public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
-    static var localeDictionary: Dictionary<String, Any>!
-    
     var lastActivation: NSDate?
     open var isAppActive = true
     var menuIcon: String!
@@ -148,11 +135,10 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     func initializeViewManager(_ route: Dictionary<AnyHashable, Any>,_ options: Dictionary<AnyHashable, Any>) {
         setAppOptions(options)
         
-        // initialise translations
-        if let locales = (options["locale"] as? Dictionary<String, Any>) {
-            TLManager.localeDictionary = locales
-        } else {
-            TLManager.localeDictionary = appDelegate.defaultTranslation()
+        // change translation values
+        if let locale = options["locale"] as? String {
+            let translations = options["translations"] as? Dictionary<String, Any>
+            appDelegate.changeLocale(locale, translations: translations)
         }
         
         self.processPool = WKProcessPool()
@@ -685,13 +671,6 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     
     override public var methodQueue: DispatchQueue {
         return DispatchQueue.main
-    }
-    
-    public static func i18NItem(_ item: String) -> String {
-        if let value = (localeDictionary as NSDictionary).value(forKeyPath: item) as? String {
-            return value
-        }
-        return "(\(item)!)"
     }
     
     override public func constantsToExport() -> [AnyHashable: Any]! {

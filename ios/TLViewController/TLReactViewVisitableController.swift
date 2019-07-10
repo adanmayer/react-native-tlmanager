@@ -69,7 +69,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         self.moduleURL = URL.init(string: TLReactViewVisitableController.getPathFor(moduleName: self.moduleName))
         super.init(manager: manager)
         
-        self.title = TLManager.i18NItem("\(moduleName!)Title")
+        self.title = manager.appDelegate.i18NItem("\(moduleName!)Title")
         self.edgesForExtendedLayout = [];
 
         self.view.backgroundColor = UIColor.clear

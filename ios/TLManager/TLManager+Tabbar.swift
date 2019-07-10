@@ -124,7 +124,7 @@ extension TLManager : UITabBarDelegate {
             }
         }
 
-        items.insert(UITabBarItem(title: TLManager.i18NItem("menu"),
+        items.insert(UITabBarItem(title: appDelegate.i18NItem("menu-customizer.menu"),
                                   image: self.tabBar?.defaultMenuBarImage(menuIcon), tag: -1), at:0)
         let reselectMenu = (tabBar?.selectedItem?.tag == -1)
         tabBar?.items = items
