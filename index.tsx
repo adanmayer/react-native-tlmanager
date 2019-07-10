@@ -36,8 +36,8 @@ export enum TLScriptTarget {
 export enum TLRequestSource {
     generic = 'generic',
     tabBar  = 'tabBar',
-    subMenu = 'subMenu', 
-    subMenuLink = 'subMenuLink'
+    replaceLink = 'replaceLink', 
+    subPageLink = 'subPageLink'
 }
 
 export interface TLAppOptions {

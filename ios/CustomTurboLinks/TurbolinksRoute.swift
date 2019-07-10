@@ -4,7 +4,7 @@ import Turbolinks
 public enum RequestSource : String {
     case generic
     case tabBar
-    case subMenu
+    case replaceLink
     case subPageLink
 }
 
