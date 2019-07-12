@@ -26,6 +26,7 @@ open class TLViewController: CustomViewController, Visitable {
     open var visitableURL: URL!
     open var hasContent: Bool = false
     open var keyboardVisible: Bool = false
+	open var storedContentPosition: CGPoint = CGPoint.zero
 
     open var scrollView: UIScrollView? { return visitableView.webView?.scrollView }
     open var viewAnimation: ViewAnimation = .normal
@@ -106,6 +107,13 @@ open class TLViewController: CustomViewController, Visitable {
         bottomVisitableContraint = visitableView.bottomAnchor.constraint(equalTo: safeGuide.bottomAnchor, constant: 0)
         bottomVisitableContraint?.isActive = true
     }
+	
+	open func restoreStoredScrollPosition() {
+		// restore contentOffset
+		if (self.visitableView.webView != nil) {
+			self.visitableView.webView!.scrollView.contentOffset = self.storedContentPosition
+		}
+	}
     
     open override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = (self.navigationController!.viewControllers.count <= 1)
@@ -138,6 +146,11 @@ open class TLViewController: CustomViewController, Visitable {
     }
 
     open override func viewWillDisappear(_ animated: Bool) {
+		if (self.visitableView.webView != nil) {
+			self.storedContentPosition = self.visitableView.webView!.scrollView.contentOffset
+		} else {
+			self.storedContentPosition = CGPoint.zero
+		}
         super.viewWillAppear(animated)
 		if manager.hasNavigation {
 			manager.navigation.navigationBar.removeGestureRecognizer(tapGestureRecognizer)
