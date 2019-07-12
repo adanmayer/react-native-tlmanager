@@ -66,4 +66,49 @@ class TLNavigationController: UINavigationController, UINavigationControllerDele
         return nil;
     }
 
+    func activateTopVisitable(_ activatedVC: TLViewController) {
+        if let topVisitable = self.topViewController as? TLViewController {
+            //deactivatedVC.visitableView.hideScreenshot()
+            //deactivatedVC.visitableView.showScreenshot()
+            self.session.activateVisitable(activatedVC, showScreenshot: false)
+            topVisitable.reload()
+        }
+    }
+    
+    override open var viewControllers: [UIViewController] {
+        get { return super.viewControllers }
+        set {
+            super.viewControllers = newValue
+            if self.session.interactiveTransition {
+                self.session.interactiveTransition = false
+                print("Save settings now")
+                if let vc = self.topViewController as? TLViewController {
+                    vc.visitableDelegate?.visitableViewWillAppear(vc)
+                }
+            }
+        }
+    }
+
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if  let _ = navigationController.topViewController as? TLViewController,
+            let coordinator = navigationController.topViewController?.transitionCoordinator {
+
+            // if viewController is in stack we are trying to show an old view controller during a transition
+            self.session.interactiveTransition = coordinator.isInteractive
+            print("Is interruptable: \(self.session.interactiveTransition)")
+            coordinator.notifyWhenInteractionChanges({ (context) in
+                print("Is cancelled: \(context.isCancelled)")
+//                if (context.isCancelled) {
+//                    if (self.viewControllers.firstIndex(of: viewController) != nil) {
+//                        if let vc = viewController as? TLViewController {
+//                            self.activateTopVisitable(topVC)
+//                        }
+//                   }
+//                }
+            })
+        } else {
+            self.session.interactiveTransition = false
+        }
+    }
+    
 }

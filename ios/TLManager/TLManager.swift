@@ -396,9 +396,8 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     }
     
     @objc public func updateNavigation(_ title: String, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?, _ options: Dictionary<AnyHashable, Any>?) {
-
         // rewrite to URL, if it got redirected
-       if let visitable = visibleViewController as? TLViewController, visitable.visitableURL != (visitable.visitableView.webView!.url ?? visitable.visitableURL) {
+        if let visitable = visibleViewController as? TLViewController, visitable.visitableURL != (visitable.visitableView.webView!.url ?? visitable.visitableURL) {
             visitable.visitableURL = visitable.visitableView.webView!.url!
         }
         
