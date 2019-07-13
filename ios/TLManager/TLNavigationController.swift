@@ -68,13 +68,12 @@ class TLNavigationController: UINavigationController, UINavigationControllerDele
 	
 	public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
 		// if an interactive transaction ended => trigger appearance on the visitableDelegate, which blocked processing
-		if self.session.interactiveTransition,
-			let vc = viewController as? TLViewController {
-			self.session.interactiveTransition = false
-			vc.viewWillAppear(false)
-			vc.viewDidAppear(false)
-//			vc.visitableDelegate?.visitableViewWillAppear(vc)
-//			vc.visitableDelegate?.visitableViewDidAppear(vc)
+		if let vc = viewController as? TLViewController {
+			if self.session.interactiveTransition {
+				self.session.interactiveTransition = false
+				vc.viewWillAppear(false)
+				vc.viewDidAppear(false)
+			}
 		}
 	}
 	
@@ -82,11 +81,15 @@ class TLNavigationController: UINavigationController, UINavigationControllerDele
         if let coordinator = navigationController.topViewController?.transitionCoordinator {
             // if viewController is in stack we are trying to show an old view controller during a transition
             self.session.interactiveTransition = coordinator.isInteractive
-            coordinator.notifyWhenInteractionChanges({ (context) in
+			coordinator.animate(alongsideTransition: nil, completion: { (context) in
 				if context.isCancelled {
-					self.session.interactiveTransition = false
+					if let fromController = context.viewController(forKey: .from) as? TLViewController {
+						self.navigationController(navigationController, didShow: fromController, animated: animated)
+					} else {
+						self.session.interactiveTransition = false
+					}
 				}
-            })
+			})
         } else {
             self.session.interactiveTransition = false
         }
