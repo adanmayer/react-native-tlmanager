@@ -95,6 +95,8 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        visitableDidRender()
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
@@ -120,7 +122,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     
     open func visitableDidRender() {
         //manager.sendEvent(withName: "turbolinksVisitCompleted", body: ["href": moduleURL.absoluteString, "path": moduleURL.path])
-        //manager.handleVisitCompleted(moduleURL)
+        manager.handleVisitCompleted(moduleURL)
     }
     
     open func didRedirect(to: URL) {
