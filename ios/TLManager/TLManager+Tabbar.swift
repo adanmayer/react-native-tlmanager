@@ -127,11 +127,16 @@ extension TLManager : UITabBarDelegate {
         items.insert(UITabBarItem(title: appDelegate.i18NItem("menu-customizer.menu"),
                                   image: self.tabBar?.defaultMenuBarImage(menuIcon), tag: -1), at:0)
         let reselectMenu = (tabBar?.selectedItem?.tag == -1)
+        let oldSelection = (tabBarItemFor(tag: tabBar?.selectedItem?.tag ?? -1) ?? [:])["id"]
         tabBar?.items = items
         if (reselectMenu) {
             tabBar?.selectedItem = tabBar?.items?.first
         } else {
-            selectTabBarItemWith(url: self.navSession.topmostVisitable?.visitableURL ?? nil)
+            if let oldSelection = oldSelection {
+                selectTabBarItem(oldSelection)
+            } else {
+                selectTabBarItemWith(url: self.navSession.topmostVisitable?.visitableURL ?? nil)
+            }
         }
     }
     
