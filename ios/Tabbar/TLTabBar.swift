@@ -13,10 +13,16 @@ open class TLTabBarItem: UITabBarItem {
 }
 
 
-open class TLTabBar : UITabBar, UIDropInteractionDelegate {
+open class TLTabBar : UITabBar {
     open func createTabBarItem(withData item: Dictionary<String, String>, tag: Int) -> UITabBarItem {
         return UITabBarItem(title: item["title"] ?? "", image: UIImage.init(named: item["image"] ?? ""), tag: tag)
     }
+    
+    open func prepareForCustomizer(_ customizer: TLCustomizerViewController) {}
+    
+    open func refreshFromCustomizer() {}
+    
+    open func finishCustomizer() {}
     
     open func clearTabBarButtonViews() {
         // add cleanup here

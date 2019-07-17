@@ -54,9 +54,6 @@ extension TLManager : UITabBarDelegate {
             tabBar!.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
             tabBar!.bottomAnchor.constraint(equalTo: safeGuide.bottomAnchor).isActive = true
             tabBar!.heightAnchor.constraint(equalToConstant: tabBarHeight).isActive = true
-            
-            let dropInteraction = UIDropInteraction(delegate: tabBar!)
-            tabBar!.addInteraction(dropInteraction)
 
             if let vc = self.navigation.topViewController as? TLViewController {
                 vc.updateScrollViewInsets()
@@ -148,18 +145,23 @@ extension TLManager : UITabBarDelegate {
     }
     
     public func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        // called when a new view is selected by the user (but not programatically)
-        if (item.tag >= 0) {
-            if let data = tabBarItemFor(tag: item.tag), data["href"] != "" {
-                let url = URL.init(string: data["href"]!)!
-                popToRoot()
-                DispatchQueue.main.async {
-                    self.sendEvent(withName: "turbolinksVisit", body: ["href": url.absoluteString, "path": url.path, "action": Action.Replace.rawValue])
-                }
-            }
+        if (customizerView == self.navigation.topViewController) {
+            // select menu again
+            self.tabBar?.selectedItem = self.tabBar?.items?.first
         } else {
-            DispatchQueue.main.async {
-                self.sendEvent(withName: "turbolinksShowMenu", body: [:])
+            // called when a new view is selected by the user (but not programatically)
+            if (item.tag >= 0) {
+                if let data = tabBarItemFor(tag: item.tag), data["href"] != "" {
+                    let url = URL.init(string: data["href"]!)!
+                    popToRoot()
+                    DispatchQueue.main.async {
+                        self.sendEvent(withName: "turbolinksVisit", body: ["href": url.absoluteString, "path": url.path, "action": Action.Replace.rawValue])
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.sendEvent(withName: "turbolinksShowMenu", body: [:])
+                }
             }
         }
     }
