@@ -22,6 +22,15 @@ extension TLManager : UITabBarDelegate {
         }
     }
     
+    @objc public func hideTabBarCustomizer() {
+        if (customizerView != nil) {
+            if (navigation.topViewController == customizerView) {
+                navigation.popViewController(animated: true)
+            }
+            customizerView = nil
+        }
+    }
+    
     public func selectTabBarItem(_ selectedItem: String) {
         // set highlight
 		if let tabBar = self.tabBar, let _ = tabBar.items {

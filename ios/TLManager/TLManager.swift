@@ -29,7 +29,7 @@ public protocol TLManagerAppDelegate {
     func injectJavaScriptWithTarget(_ target: String,script: String,resolve: @escaping ((Any?) -> Swift.Void),reject: @escaping ((String, String?, Error?) -> Swift.Void))
     
     func registerGlobalSwipe() -> Bool
-    func changeLocale(_ locale: String, translations: Dictionary<String, Any>?)
+    func changeLocale(_ locale: String)
     func i18NItem(_ item: String) -> String
     
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer)
@@ -137,8 +137,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         
         // change translation values
         if let locale = options["locale"] as? String {
-            let translations = options["translations"] as? Dictionary<String, Any>
-            appDelegate.changeLocale(locale, translations: translations)
+            appDelegate.changeLocale(locale)
         }
         
         self.processPool = WKProcessPool()
@@ -364,7 +363,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     
     @objc public func showRNView(_ moduleName: String, _ route: Dictionary<AnyHashable, Any>) {
         if (customizerView != nil) {
-            self.navigation.popViewController(animated: true)
+            self.hideTabBarCustomizer()
             return
         }
         
