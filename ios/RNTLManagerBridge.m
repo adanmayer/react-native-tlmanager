@@ -10,6 +10,7 @@
 @interface RCT_EXTERN_MODULE(TLManager, NSObject)
 RCT_EXTERN_METHOD(reloadVisitable)
 RCT_EXTERN_METHOD(reloadSession)
+RCT_EXTERN_METHOD(changeLocale:(NSString*))
 RCT_EXTERN_METHOD(dismiss)
 RCT_EXTERN_METHOD(popToRoot)
 RCT_EXTERN_METHOD(back)

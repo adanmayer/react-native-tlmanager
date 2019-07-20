@@ -328,6 +328,10 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         }
     }
 
+    @objc public func changeLocale(_ locale: String) {
+        appDelegate.changeLocale(locale)        
+    }
+    
     @objc public func dismiss() {
         navigation.dismiss(animated: true)
     }
