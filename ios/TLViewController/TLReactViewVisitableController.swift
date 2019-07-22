@@ -65,7 +65,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
 	
     init(_ manager: TLManager, _ route: TurbolinksRoute) {
         self.moduleName = route.url!.lastPathComponent
-        self.visitableURL = URL.init(string: "about:blank")
+        self.visitableURL = URL.init(string: manager.nativeBaseURLString)
         self.moduleURL = URL.init(string: TLReactViewVisitableController.getPathFor(moduleName: self.moduleName))
         super.init(manager: manager)
         
@@ -107,6 +107,10 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         self.view = view
         
 		manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path, "title": self.title ?? ""])
+    }
+    
+    open override func changeLocale(_ locale: String) {
+        self.title = manager.appDelegate.i18NItem("\(moduleName!)Title")
     }
     
     // MARK: Visitable View

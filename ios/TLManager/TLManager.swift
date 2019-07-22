@@ -116,6 +116,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     var customMenuIcon: UIImage?
     var loadingView: String?
     open var baseURLString: String?
+    open var nativeBaseURLString: String!
     weak var customizerView: TLCustomizerViewController?
     
     public var swipeLeft: UISwipeGestureRecognizer?
@@ -161,6 +162,9 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
             swipeLeft!.direction = .left
             navigation.view.addGestureRecognizer(swipeLeft!)
         }
+        
+        // set base URL for native views
+        nativeBaseURLString = (options["nativeBaseURL"] as? String ?? "about:blank")
  
         if let href = route["href"] as? String, href != "" {
             self.visit(route)
@@ -329,7 +333,12 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     }
 
     @objc public func changeLocale(_ locale: String) {
-        appDelegate.changeLocale(locale)        
+        appDelegate.changeLocale(locale)
+        for vc in navigation.viewControllers {
+            if let vc = vc as? CustomViewController {
+                vc.changeLocale(locale)
+            }
+        }
     }
     
     @objc public func dismiss() {

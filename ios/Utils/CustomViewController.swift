@@ -34,6 +34,8 @@ open class CustomViewController: TLBaseViewController {
     public var menuButtonData: Dictionary<AnyHashable, Any>?
     public var menuButton: UIBarButtonItem?
     
+    open func changeLocale(_ locale: String) { }
+    
     open func setupBackButton(_ forced: Bool = false, _ enabled: Bool = true) {
         if ((self.navigationController?.viewControllers.count ?? 0) > 1) || forced {
             let backbutton = UIButton(type: .custom)
