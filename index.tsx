@@ -41,8 +41,10 @@ export enum TLRequestSource {
 }
 
 export interface TLAppOptions {
-    userAgent?: string, 
-    baseURL?: string, 
+    userAgent?: string,
+    locale: string,
+    baseURL?: string,
+    nativeBaseURL?: string,
     messageHandler?: string, 
     loadingView?: string, 
     leftView?: string, 
@@ -125,6 +127,14 @@ export class TLManager {
     */
     unmountViewManager() {
         RNTLManager.unmountViewManager()
+    }
+
+    /*
+        Change locale for I18n support
+    */
+
+    changeLocale(locale: string) {
+        RNTLManager.changeLocale(locale)
     }
 
     /* 
