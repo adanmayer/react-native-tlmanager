@@ -698,7 +698,16 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     override public func constantsToExport() -> [AnyHashable: Any]! {
         let appVersion   = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         let buildVersion = Bundle.main.infoDictionary![kCFBundleVersionKey as String] as? String
-
+		let storeInfo = Bundle.main.appStoreReceiptURL?.lastPathComponent ?? "receipt"
+		#if TARGET_IPHONE_SIMULATOR
+		var releaseInfo = "simulator"
+		#else
+		var releaseInfo = "production"
+		#endif
+		if (storeInfo == "sandboxReceipt") {
+			releaseInfo = "beta"
+		}
+		
         return [
             "ErrorCode": [
                 "httpFailure": ErrorCode.httpFailure.rawValue,
@@ -711,6 +720,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
             ],
             "appVersion": appVersion ?? "?",
             "buildVersion": buildVersion ?? "?",
+			"releaseInfo": releaseInfo
         ]
     }
     

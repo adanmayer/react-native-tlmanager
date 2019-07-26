@@ -109,6 +109,18 @@ export class TLManager {
         return NativeModules.TLManager.buildVersion
     }
 
+    releaseInfo(): string {
+        return NativeModules.TLManager.releaseInfo
+    }
+
+    isBeta(): boolean {
+        return (this.releaseInfo() == "beta")
+    }
+
+    isSimulator(): boolean {
+        return (this.releaseInfo() == "simulator")
+        }
+
     constructor() {
         // console.log('Turbolinks instance created')
     }
