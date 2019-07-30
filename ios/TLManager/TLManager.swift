@@ -56,7 +56,7 @@ extension TLManagerAppDelegate {
     func handleTitlePress(_ manager: TLManager, url: URL, location: CGPoint) -> Bool {
         return false
     }
-
+    
     func updateNavigation(_ manager: TLManager,_ title: String, _ subMenuData: Dictionary<AnyHashable, Any>, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?) -> Bool {
         return false
     }
@@ -407,6 +407,24 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         }
     }
     
+   @objc public func selectTabBarItem(_ selectedItem: String) {
+        // set highlight
+        if let tabBar = self.tabBar, let _ = tabBar.items {
+            if let item = tabBarActiveItems.first(where: {$0["id"] == selectedItem}) {
+                if let idx = tabBarActiveItems.firstIndex(of: item),
+                    (idx < tabBar.items!.count - 1) {
+                    tabBar.selectedItem = tabBar.items![idx + 1]
+                    return;
+                }
+            }
+            // select Menu by default
+            tabBar.selectedItem = nil
+            if (tabBar.items!.count > 0) {
+                tabBar.selectedItem = tabBar.items!.first
+            }
+        }
+    }
+    
     @objc public func updateNavigation(_ title: String, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?, _ options: Dictionary<AnyHashable, Any>?) {
 		if navSession.interactiveTransition { return }
 
@@ -475,6 +493,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     }
     
     fileprivate func addToRootViewController(_ viewController: UIViewController) {
+        viewController.willMove(toParent: getRootViewController())
         getRootViewController().addChild(viewController)
         if (_mountView != nil) {
             _mountView!.addSubview(viewController.view)
@@ -482,6 +501,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         } else {
             getRootViewController().view.addSubview(viewController.view)
         }
+        viewController.didMove(toParent: getRootViewController())
     }
     
     fileprivate func removeFromRootViewController() {
@@ -496,6 +516,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
             vc.willMove(toParent: nil)
             vc.view.removeFromSuperview()
             vc.removeFromParent()
+            vc.didMove(toParent: nil)
         }
         viewMounted = false
     }

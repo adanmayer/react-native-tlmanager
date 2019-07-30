@@ -31,24 +31,6 @@ extension TLManager : UITabBarDelegate {
         }
     }
     
-    public func selectTabBarItem(_ selectedItem: String) {
-        // set highlight
-		if let tabBar = self.tabBar, let _ = tabBar.items {
-			if let item = tabBarActiveItems.first(where: {$0["id"] == selectedItem}) {
-				if let idx = tabBarActiveItems.firstIndex(of: item),
-					(idx < tabBar.items!.count - 1) {
-					tabBar.selectedItem = tabBar.items![idx + 1]
-					return;
-				}
-			}
-			// select Menu by default
-			tabBar.selectedItem = nil
-			if (tabBar.items!.count > 0) {
-				tabBar.selectedItem = tabBar.items!.first
-			}
-		}
-    }
-    
     func addTabBarView(toView view: UIView) {
         if (tabBar == nil) {
             tabBar = appDelegate.addAppTabBar()

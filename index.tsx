@@ -170,6 +170,12 @@ export class TLManager {
         RNTLManager.updateNavigation(title, buttons, options)
     }
 
+    /* 
+        Selected navbar item
+    */
+    selectTabBarItem(item: string) {
+        RNTLManager.selectTabBarItem(item)
+    }
 
     /*
         Update TabBar with configuration data

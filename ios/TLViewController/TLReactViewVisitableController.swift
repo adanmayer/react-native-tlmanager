@@ -62,6 +62,10 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
 	class func getPathFor(moduleName: String) -> String {
 		return "RN://ReactNative.local/\(moduleName)"
 	}
+    
+    deinit {
+        setParentRecogniserFor(view: nil, enabled: true)
+    }
 	
     init(_ manager: TLManager, _ route: TurbolinksRoute) {
         self.moduleName = route.url!.lastPathComponent
@@ -76,37 +80,48 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         
         self.assignMenuButton(route.leftButton)
         self.assignActionButtons(route.actionButtons)
+        
+        let rootView = RCTRootView(bridge: manager.bridge,
+                                   moduleName: moduleName,
+                                   initialProperties: nil)
+        self.view = rootView
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func setParentRecogniserFor(view: UIView?, enabled: Bool) {
+        var rnSuperView = (view != nil) ? view!.superview : UIApplication.shared.keyWindow!.rootViewController!.view
+        while (rnSuperView != nil) {
+            if let rnRootView = rnSuperView as? RCTRootView {
+                rnRootView.contentView.gestureRecognizers?.forEach({ (recogniser) in
+                    recogniser.isEnabled = enabled
+                })
+            }
+            rnSuperView = rnSuperView?.superview
+        }
+    }
+    
     open override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = (self.navigationController!.viewControllers.count <= 1)
         super.viewWillAppear(animated)
-
-        let rootView = RCTRootView(bridge: manager.bridge,
-                                   moduleName: moduleName,
-                                   initialProperties: nil)
-        self.view = rootView
+        
         self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path, "title": self.title ?? ""])
     }
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
+        setParentRecogniserFor(view: self.view, enabled: false)
         visitableDidRender()
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        let view = UIView.init()
-        view.backgroundColor = UIColor.white
-        self.view = view
-        
-		manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path, "title": self.title ?? ""])
+        setParentRecogniserFor(view: self.view, enabled: true)
+        manager.sendEvent(withName: "turbolinksRNViewDisappear", body: ["href": moduleURL.absoluteString, "path": moduleURL.path, "title": self.title ?? ""])
     }
     
     open override func changeLocale(_ locale: String) {
