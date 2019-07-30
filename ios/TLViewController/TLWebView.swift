@@ -2,6 +2,7 @@ import WebKit
 import Turbolinks
 
 public protocol MsgBridgeDelegate: class {
+    func webView(_ sender: NSObject, webView: WebView, clientInitializedWithData data: Dictionary<String, AnyObject>)
     func webView(_ sender: NSObject, webView: WebView, executeActionWithData data: Dictionary<String, AnyObject>, completion: (() -> Void)?)
     func webView(_ sender: NSObject, webView: WebView, notificationWithData data: Dictionary<String, AnyObject>)
 }
@@ -92,7 +93,7 @@ open class TLWebView: WebView {
         let msg = TLScriptMessage.parse(message) ?? TLScriptMessage(name: .NotHandled, data: [:])
         switch msg.name {
         case .ClientInitialized:
-            print("clientInitialized")
+            msgBridgeDelegate?.webView(self, webView: self, clientInitializedWithData: msg.data)
         case .ExecuteAction:
             msgBridgeDelegate?.webView(self, webView: self, executeActionWithData : msg.data, completion: nil)
         case .Notification:

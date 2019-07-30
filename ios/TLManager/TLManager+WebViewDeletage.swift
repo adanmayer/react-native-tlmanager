@@ -17,6 +17,10 @@ extension TLManager: MsgBridgeDelegate {
     public func webView(_ sender: NSObject, webView: WebView, notificationWithData data: Dictionary<String, AnyObject>) {
         defaultNotificationWithData(data)
     }
+    
+    public func webView(_ sender: NSObject, webView: WebView, clientInitializedWithData data: Dictionary<String, AnyObject>) {
+        print("clientInitialized")
+    }
 }
 
 extension TLManager: WKScriptMessageHandler {
@@ -30,7 +34,7 @@ extension TLManager: WKScriptMessageHandler {
             case .Notification:
                 webView(self, webView: self.navSession.webView, notificationWithData: msg.data)
             case .ClientInitialized:
-                print("clientInitialized")
+                webView(self, webView: self.navSession.webView, clientInitializedWithData: msg.data)
             case .NotHandled:
                 print("not handled!")
             }

@@ -699,7 +699,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         let appVersion   = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         let buildVersion = Bundle.main.infoDictionary![kCFBundleVersionKey as String] as? String
 		let storeInfo = Bundle.main.appStoreReceiptURL?.lastPathComponent ?? "receipt"
-		#if TARGET_IPHONE_SIMULATOR
+		#if (arch(i386) || arch(x86_64)) // simulator
 		var releaseInfo = "simulator"
 		#else
 		var releaseInfo = "production"
