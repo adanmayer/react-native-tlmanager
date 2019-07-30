@@ -140,6 +140,34 @@ open class TLViewController: CustomViewController, Visitable {
 	
     @objc func navBarTapped(_ theObject: UITapGestureRecognizer){
         let pressedLocation = theObject.location(in: manager.navigation.navigationBar)
+        
+        let navbounds: CGRect = manager.mainNavigation().navigationBar.bounds
+        let leftButtonBounds = CGRect(x: navbounds.minX, y: navbounds.minY, width: 50, height: navbounds.height)
+        let rightButtonBounds = CGRect(x: navbounds.maxX - 50, y: navbounds.minY, width: 50, height: navbounds.height)
+        // trigger left button
+        if (manager.mainNavigation().topViewController?.navigationItem.leftBarButtonItem != nil)
+            && leftButtonBounds.contains(pressedLocation) {
+            let button: UIBarButtonItem = manager.mainNavigation().topViewController!.navigationItem.leftBarButtonItem!
+            if ((button.customView != nil) && ((button.customView as? UIButton) != nil)) {
+                (button.customView as! UIButton).sendActions(for: .touchUpInside)
+            } else {
+                UIApplication.shared.sendAction(button.action!, to: button.target, from: self, for: nil)
+            }
+            return
+        }
+
+        // trigger right button
+        if (manager.mainNavigation().topViewController?.navigationItem.rightBarButtonItem != nil)
+            && rightButtonBounds.contains(pressedLocation) {
+            let button: UIBarButtonItem = manager.mainNavigation().topViewController!.navigationItem.rightBarButtonItem!
+            if ((button.customView != nil) && ((button.customView as? UIButton) != nil)) {
+                (button.customView as! UIButton).sendActions(for: .touchUpInside)
+            } else {
+                UIApplication.shared.sendAction(button.action!, to: button.target, from: self, for: nil)
+            }
+            return
+        }
+        
         if !manager.appDelegate.handleTitlePress(manager, url: self.visitableURL, location: pressedLocation) {
             manager.sendEvent(withName: "turbolinksTitlePress", body: [])
         }
