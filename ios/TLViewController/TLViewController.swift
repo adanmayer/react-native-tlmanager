@@ -151,7 +151,9 @@ open class TLViewController: CustomViewController, Visitable {
             if ((button.customView != nil) && ((button.customView as? UIButton) != nil)) {
                 (button.customView as! UIButton).sendActions(for: .touchUpInside)
             } else {
-                UIApplication.shared.sendAction(button.action!, to: button.target, from: self, for: nil)
+                if (button.action != nil) {
+                    UIApplication.shared.sendAction(button.action!, to: button.target, from: self, for: nil)
+                }
             }
             return
         }
@@ -163,7 +165,9 @@ open class TLViewController: CustomViewController, Visitable {
             if ((button.customView != nil) && ((button.customView as? UIButton) != nil)) {
                 (button.customView as! UIButton).sendActions(for: .touchUpInside)
             } else {
-                UIApplication.shared.sendAction(button.action!, to: button.target, from: self, for: nil)
+                if (button.action != nil) {
+                    UIApplication.shared.sendAction(button.action!, to: button.target, from: self, for: nil)
+                }
             }
             return
         }

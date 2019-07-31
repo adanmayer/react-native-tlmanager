@@ -333,20 +333,26 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     }
 
     @objc public func changeLocale(_ locale: String) {
-        appDelegate.changeLocale(locale)
-        for vc in navigation.viewControllers {
-            if let vc = vc as? CustomViewController {
-                vc.changeLocale(locale)
+        if (hasNavigation) {
+            appDelegate.changeLocale(locale)
+            for vc in navigation.viewControllers {
+                if let vc = vc as? CustomViewController {
+                    vc.changeLocale(locale)
+                }
             }
         }
     }
     
     @objc public func dismiss() {
-        navigation.dismiss(animated: true)
+        if (hasNavigation) {
+            navigation.dismiss(animated: true)
+        }
     }
     
     @objc public func popToRoot() {
-        navigation.popToRootViewController(animated: false)
+        if (hasNavigation) {
+            navigation.popToRootViewController(animated: false)
+        }
     }
     
     @objc public func backTo(_ route: Dictionary<AnyHashable, Any>) {
@@ -371,7 +377,9 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     }
 
     @objc public func back() {
-        navigation.popViewController(animated: true)
+        if (hasNavigation) {
+            navigation.popViewController(animated: true)
+        }
     }
     
     @objc public func showRNView(_ moduleName: String, _ route: Dictionary<AnyHashable, Any>) {
