@@ -119,7 +119,11 @@ export class TLManager {
 
     isSimulator(): boolean {
         return (this.releaseInfo() == "simulator")
-        }
+    }
+
+    isProduction(): boolean {
+        return (this.releaseInfo() == "production")
+    }
 
     constructor() {
         // console.log('Turbolinks instance created')
