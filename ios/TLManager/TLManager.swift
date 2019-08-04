@@ -167,8 +167,12 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         // set base URL for native views
         nativeBaseURLString = (options["nativeBaseURL"] as? String ?? "about:blank")
  
+        // clear webView
+        navSession.webView.load(URLRequest.init(url: URL.init(string: "about:blank")!))
         if let href = route["href"] as? String, href != "" {
-            self.visit(route)
+            DispatchQueue.main.async {
+                self.visit(route)
+            }
         }
     }
     
@@ -189,6 +193,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
                     self.handleViewMounted()
                 }
             }
+            manager.batchDidComplete()
         }
         //        self._mountView = rootViewController().view
         //        self.initializeViewManager(route, options)
