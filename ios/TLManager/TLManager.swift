@@ -24,6 +24,7 @@ public protocol TLManagerAppDelegate {
     func executeActionWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: (() -> Void)?) -> Bool
 
     func visitStartupURL()
+    func initialRequestFinished()
     func assignStartupURL(_ url: URL?)
     // if different targets are implemented
     func injectJavaScriptWithTarget(_ target: String,script: String,resolve: @escaping ((Any?) -> Swift.Void),reject: @escaping ((String, String?, Error?) -> Swift.Void))
@@ -453,22 +454,24 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     }
     
     @objc public func updateTabBar(_ tabBarConfig: Dictionary<AnyHashable, Any>) {
-		if let items = tabBarConfig["items"] as? Array<Dictionary<String, AnyObject>>,
-           let activeItems = tabBarConfig["activeItems"] as? Array<String>,
-           let defaultItems = tabBarConfig["defaultItems"] as? Array<String> {
-			addTabBarView(toView: navigation!.view!)
-            let selectedItem = tabBarConfig["selectedItem"] as? String
-			menuIcon = (tabBarConfig["menuIcon"] as? String) ?? "defaultMenuIcon"
-			tabBarItems = items.map({
-							["id": $0["id"] as! String,
-							 "href": $0["href"] as! String,
-							 "title": $0["title"] as? String ?? "",
-							 "icon": $0["icon"] as? String ?? "",
-							 "badgeValue": $0["badgeValue"] as? String ?? ($0["badgeValue"] as? NSNumber)?.stringValue ?? ""]})
-            initTabbar(activeIds: activeItems, defaultIds: defaultItems, selectedItem: selectedItem)
-		} else {
-			self.removeTabBar()
-		}
+        if hasNavigation {
+            if let items = tabBarConfig["items"] as? Array<Dictionary<String, AnyObject>>,
+               let activeItems = tabBarConfig["activeItems"] as? Array<String>,
+               let defaultItems = tabBarConfig["defaultItems"] as? Array<String> {
+                addTabBarView(toView: navigation!.view!)
+                let selectedItem = tabBarConfig["selectedItem"] as? String
+                menuIcon = (tabBarConfig["menuIcon"] as? String) ?? "defaultMenuIcon"
+                tabBarItems = items.map({
+                                ["id": $0["id"] as! String,
+                                 "href": $0["href"] as! String,
+                                 "title": $0["title"] as? String ?? "",
+                                 "icon": $0["icon"] as? String ?? "",
+                                 "badgeValue": $0["badgeValue"] as? String ?? ($0["badgeValue"] as? NSNumber)?.stringValue ?? ""]})
+                initTabbar(activeIds: activeItems, defaultIds: defaultItems, selectedItem: selectedItem)
+            } else {
+                self.removeTabBar()
+            }
+        }
     }
     
     fileprivate func mountViewController(_ viewController: UIViewController) {
@@ -712,7 +715,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 
         if (self.initialRequest) {
             self.initialRequest = false
-            appDelegate.visitStartupURL();
+            appDelegate.initialRequestFinished();
         }
     }
     
