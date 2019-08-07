@@ -29,7 +29,7 @@
       }
     }
   
-    this.mobileClient = new WebView(webkit.messageHandlers.MsgBridge)
+    this.mobileClient = new MobileClient(webkit.messageHandlers.MsgBridge)
   
     addEventListener("error", function(event) {
                      var error = event.message + " (" + event.filename + ":" + event.lineno + ":" + event.colno + ")"
