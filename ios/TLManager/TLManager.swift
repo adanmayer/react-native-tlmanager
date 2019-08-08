@@ -308,9 +308,9 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 
 		self.removeTabBar()
 		self.removeFromRootViewController()
-		self.navigation.session = nil
-        self.navigation = nil
-		self.processPool = nil
+//        self.navigation.session = nil
+//        self.navigation = nil
+//        self.processPool = nil
 
         NotificationCenter.default.removeObserver(self)
     }

@@ -19,7 +19,7 @@ class TLNavigationController: UINavigationController, UINavigationControllerDele
     }
 	
 	deinit {
-		print("deinit")
+		print("deinit navigation controller")
 	}
 	
     func setupWebView(_ manager: TLManager) -> WKWebViewConfiguration {
