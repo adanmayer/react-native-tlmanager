@@ -1,5 +1,5 @@
 {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "name": "react-native-tlmanager",
     "description": "Turbolink WebView manager for react-native",
     "repository": {
@@ -16,7 +16,7 @@
         "turbolink"
     ],
     "peerDependencies": {
-        "react-native": "^0.60.0"
+        "react-native": "^0.60.4"
     },
     "nativePackage": true
 }
