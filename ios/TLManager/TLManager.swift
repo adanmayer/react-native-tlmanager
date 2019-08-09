@@ -308,9 +308,9 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 
 		self.removeTabBar()
 		self.removeFromRootViewController()
-//        self.navigation.session = nil
-//        self.navigation = nil
-//        self.processPool = nil
+		self.navigation.session = nil
+        self.navigation = nil
+		self.processPool = nil
 
         NotificationCenter.default.removeObserver(self)
     }
@@ -582,6 +582,11 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     
     @objc public func debugMsg(_ message: String) {
         print(message)
+    }
+    
+    @objc public func trackEvent(_ eventName: String, _ data: Dictionary<AnyHashable, Any>?) {
+        let payload = data as? Dictionary<String, Any>
+        print("Event: \(eventName) {\(payload ?? [:])}")
     }
 
 	public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {

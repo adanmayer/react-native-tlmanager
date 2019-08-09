@@ -27,4 +27,5 @@ RCT_EXTERN_METHOD(executeAction:(NSDictionary *) resolve:(RCTPromiseResolveBlock
 RCT_EXTERN_METHOD(injectJavaScript:(NSString *) resolve:(RCTPromiseResolveBlock *) reject:(RCTPromiseRejectBlock *))
 RCT_EXTERN_METHOD(injectJavaScriptWithTarget:(NSString *) script:(NSString *) resolve:(RCTPromiseResolveBlock *) reject:(RCTPromiseRejectBlock *))
 RCT_EXTERN_METHOD(debugMsg:(NSString*))
+RCT_EXTERN_METHOD(trackEvent:(NSString*) data:(NSDictionary *))
 @end

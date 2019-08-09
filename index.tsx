@@ -249,6 +249,10 @@ export class TLManager {
         RNTLManager.debugMsg(message);
     }
 
+    trackEvent(eventName: string, data: any): void {
+        RNTLManager.trackEvent(eventName, data);
+    }
+
     versionInfo(): string {
         return RNTLManager.versionInfo();
     }
