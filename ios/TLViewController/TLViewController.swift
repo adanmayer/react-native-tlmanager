@@ -116,14 +116,21 @@ open class TLViewController: CustomViewController, Visitable {
 	}
     
     open override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.hidesBackButton = (self.navigationController!.viewControllers.count <= 1)
+        if (self.navigationController != nil) {
+            self.navigationItem.hidesBackButton = (self.navigationController!.viewControllers.count <= 1)
+        } else {
+            self.navigationItem.hidesBackButton = true
+        }
+        
         super.viewWillAppear(animated)
         self.title = route.title
 
         visitableDelegate?.visitableViewWillAppear(self)
-               
-        tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector(self.navBarTapped(_:)))
-        manager.navigation.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+        
+        if (manager.hasNavigation) {
+            tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector(self.navBarTapped(_:)))
+            manager.navigation.navigationBar.addGestureRecognizer(tapGestureRecognizer)
+        }
 		
 		// add keyboard notifications
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
