@@ -33,6 +33,6 @@
   
     addEventListener("error", function(event) {
                      var error = event.message + " (" + event.filename + ":" + event.lineno + ":" + event.colno + ")"
-                     mobileClient.errorRaised(error)
-                     }, false)
+                     this.mobileClient.errorRaised(error)
+                     }.bind(this), false)
 })()
