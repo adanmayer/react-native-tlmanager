@@ -256,9 +256,40 @@ export class TLManager {
     versionInfo(): string {
         return RNTLManager.versionInfo();
     }
+
+    delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
     /*
         Inject javascript & execute into Turbolinks WebView
     */
+
+    async injectJavaScriptWithRetry(script: string, retries: number): Promise<any> {
+        var promise: Promise<any> = new Promise(async (resolve, reject) => {
+            var retryCount = retries
+            var reqError : any
+            var response : Response | null = null
+
+            do {
+                reqError = null
+                try {
+                    response = await this.injectJavaScript(script)
+                } catch (error) {
+                    reqError = error
+                }
+                if (reqError) {
+                    await this.delay(500) // wait 500ms
+                }
+            } while ((retryCount-- > 0) && (reqError))
+
+            if (!reqError && response) {
+                resolve(response) 
+            } else {
+                reject(reqError)
+            }
+        })
+        return promise
+    }
 
     injectJavaScript(script: string): Promise<any> {
         if (Platform.OS == 'ios') {
