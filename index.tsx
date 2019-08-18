@@ -5,10 +5,7 @@ import { NativeEventEmitter, NativeModules, processColor, Platform } from 'react
 const RNTLManager = NativeModules.TLManager // || android: NativeModules.RNTLModule
 const RNTLManagerEmitter = new NativeEventEmitter(RNTLManager);
 
-import * as React from 'react';
-import { StyleProp, ViewProps } from 'react-native';
-import { Image, Subtitle } from 'native-base';
-import { Color } from 'csstype';
+import { Image } from 'native-base';
 
 export enum TLEventNames {
     Visit = "turbolinksVisit",
@@ -264,7 +261,7 @@ export class TLManager {
         Inject javascript & execute into Turbolinks WebView
     */
 
-    async injectJavaScriptWithRetry(script: string, retries: number): Promise<any> {
+    injectJavaScriptWithRetry(script: string, retries: number): Promise<any> {
         var promise: Promise<any> = new Promise(async (resolve, reject) => {
             var retryCount = retries
             var reqError : any
