@@ -56,8 +56,8 @@ export interface TLAppOptions {
     tabBarStyle?: {
         barTintColor?: number,
         tintColor?: number, 
-    }
-}
+    },
+    shareAuthentication?: any}
 
 export interface TLActionButton {
     name: string, 
