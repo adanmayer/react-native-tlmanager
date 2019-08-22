@@ -165,6 +165,13 @@ export class TLManager {
     }
 
     /* 
+        Update authentication eg.: for share extension
+    */
+    updateShareAuthentication(sharedValues: {}) {
+        RNTLManager.updateNavigation(sharedValues)
+    }
+
+    /* 
         Update navigation with title subMenuData and additional actionButtons (quick links, auxiliary page button)
     */
     updateNavigation(title: string, buttons: TLActionButtons, options: {}) {

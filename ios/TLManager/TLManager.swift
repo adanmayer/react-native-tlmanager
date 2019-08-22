@@ -36,8 +36,10 @@ public protocol TLManagerAppDelegate {
     func handleGlobalSwipe(_ manager: TLManager, sender: UISwipeGestureRecognizer)
     
     func addAppTabBar() -> TLTabBar
-    func getTabBarCustomizer(_ manager: TLManager) -> TLCustomizerViewController
+
+    func updateShareAuthentication(_ sharedValues: Dictionary<AnyHashable, Any>) -> Bool
     
+    func getTabBarCustomizer(_ manager: TLManager) -> TLCustomizerViewController
     func handleTitlePress(_ manager: TLManager, url: URL, location: CGPoint) -> Bool
     func updateNavigation(_ manager: TLManager, _ title: String, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?, _ subMenuData: Dictionary<AnyHashable, Any>?) -> Bool
     func presentVisitableForSession(_ manager: TLManager, _ route: TurbolinksRoute) -> Bool
@@ -55,6 +57,10 @@ extension TLManagerAppDelegate {
     }
     
     func handleTitlePress(_ manager: TLManager, url: URL, location: CGPoint) -> Bool {
+        return false
+    }
+    
+    func updateShareAuthentication(_ sharedValues: Dictionary<AnyHashable, Any>) -> Bool {
         return false
     }
     
@@ -437,6 +443,10 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
                 tabBar.selectedItem = tabBar.items!.first
             }
         }
+    }
+    
+    @objc public func updateShareAuthentication(_ sharedValues: Dictionary<AnyHashable, Any>) {
+        _ = self.appDelegate.updateShareAuthentication(sharedValues)
     }
     
     @objc public func updateNavigation(_ title: String, _ actionButtons: Array<Dictionary<AnyHashable, Any>>?, _ options: Dictionary<AnyHashable, Any>?) {
