@@ -168,7 +168,7 @@ export class TLManager {
         Update authentication eg.: for share extension
     */
     updateShareAuthentication(sharedValues: {}) {
-        RNTLManager.updateNavigation(sharedValues)
+        RNTLManager.updateShareAuthentication(sharedValues)
     }
 
     /* 
