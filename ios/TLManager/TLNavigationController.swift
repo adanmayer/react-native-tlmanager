@@ -80,18 +80,18 @@ class TLNavigationController: UINavigationController, UINavigationControllerDele
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if let coordinator = navigationController.topViewController?.transitionCoordinator {
             // if viewController is in stack we are trying to show an old view controller during a transition
-            self.session.interactiveTransition = coordinator.isInteractive
+            self.session?.interactiveTransition = coordinator.isInteractive
 			coordinator.animate(alongsideTransition: nil, completion: { (context) in
 				if context.isCancelled {
 					if let fromController = context.viewController(forKey: .from) as? TLViewController {
 						self.navigationController(navigationController, didShow: fromController, animated: animated)
 					} else {
-						self.session.interactiveTransition = false
+						self.session?.interactiveTransition = false
 					}
 				}
 			})
         } else {
-            self.session.interactiveTransition = false
+            self.session?.interactiveTransition = false
         }
     }
     
