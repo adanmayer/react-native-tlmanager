@@ -34,6 +34,9 @@ class TLNavigationController: UINavigationController, UINavigationControllerDele
         webConfig.userContentController.addUserScript(userScript)
         webConfig.userContentController.removeScriptMessageHandler(forName: "MsgBridge")
         webConfig.userContentController.add(manager, name: "MsgBridge")
+
+        // adding custom user scripts
+        _ = manager.appDelegate.addCustomUserScripts(webConfig: webConfig)
         
         // we are using a central processPool for cookie sharing
         webConfig.processPool = manager.processPool!

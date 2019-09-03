@@ -16,6 +16,8 @@ public protocol TLManagerAppDelegate {
 
     func initializeResources(_ manager: TLManager, options: Dictionary<AnyHashable, Any>)
     func releaseResources()
+   
+    func addCustomUserScripts(webConfig: WKWebViewConfiguration) -> Bool
     
     func doPreprocessingForURL(_ manager: TLManager, url: URL) -> Bool
     func doPostprocessingForResponse(_ manager: TLManager, response: WKNavigationResponse) -> Bool
@@ -48,6 +50,12 @@ public protocol TLManagerAppDelegate {
 
 // default implementation
 extension TLManagerAppDelegate {
+    
+    // override if you want to inject custom user scripts into main webview
+    func addCustomUserScripts(webConfig: WKWebViewConfiguration) -> Bool {
+        return false
+    }
+
     func startupPath() -> String? {
         return nil
     }
