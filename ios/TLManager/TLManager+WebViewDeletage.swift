@@ -35,6 +35,9 @@ extension TLManager: WKScriptMessageHandler {
                 webView(self, webView: self.navSession.webView, notificationWithData: msg.data)
             case .ClientInitialized:
                 webView(self, webView: self.navSession.webView, clientInitializedWithData: msg.data)
+            case .ErrorRaised:
+                let error = (msg.data["error"] as? String) ?? "unknown"
+                print("JavaScript error: \(error)")
             case .NotHandled:
                 print("not handled!")
             }

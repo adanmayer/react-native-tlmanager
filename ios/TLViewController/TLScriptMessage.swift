@@ -4,6 +4,7 @@ enum TLScriptMessageName: String {
     case ClientInitialized = "clientInitialized"
     case ExecuteAction     = "executeAction"
     case Notification      = "notification"
+    case ErrorRaised       = "errorRaised"
     case NotHandled        = "notHandled"
 }
 

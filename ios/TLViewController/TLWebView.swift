@@ -98,6 +98,10 @@ open class TLWebView: WebView {
             msgBridgeDelegate?.webView(self, webView: self, executeActionWithData : msg.data, completion: nil)
         case .Notification:
             msgBridgeDelegate?.webView(self, webView: self, notificationWithData: msg.data)
+        case .ErrorRaised:
+            let error = (msg.data["error"] as? String) ?? "unknown"
+            print("JavaScript error: \(error)")
+            super.userContentController(userContentController, didReceive: message)
         case .NotHandled:
             super.userContentController(userContentController, didReceive: message)
         }
