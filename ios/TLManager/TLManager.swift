@@ -569,11 +569,13 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 			popToRoot()
 		}
 
-		if (tRoute.url?.host == "ReactNative.executeAction") {
-			self.defaultExecuteActionWithData(tRoute.url!.params())
-		} else {
-			self.presentVisitableForSession(tRoute)
-		}
+        if (tRoute.url != nil) {
+            if (tRoute.url?.host == "ReactNative.executeAction") {
+                self.defaultExecuteActionWithData(tRoute.url!.params())
+            } else {
+                self.presentVisitableForSession(tRoute)
+            }
+        }
     }
 
     @objc public func injectJavaScript(_ script: String,_ resolve: @escaping ((Any?) -> Swift.Void),_ reject: @escaping ((String, String?, Error?) -> Swift.Void)) {

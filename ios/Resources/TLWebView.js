@@ -16,6 +16,10 @@
         this.messageHandler.postMessage({ name: name, data: data || {} })
       },
   
+      openURL: function(url) {
+        Turbolinks.visit(url)
+      },
+  
       postMessageAfterNextRepaint: function(name, data) {
         // Post immediately if document is hidden or message may be queued by call to rAF
         if (document.hidden) {
