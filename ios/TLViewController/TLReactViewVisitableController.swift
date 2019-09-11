@@ -57,8 +57,10 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     open var visitableURL: URL!
 	open var moduleURL: URL!
     
+    open var webView: WKWebView?
+    
     let moduleName: String!
-	
+    
 	class func getPathFor(moduleName: String) -> String {
 		return "RN://ReactNative.local/\(moduleName)"
 	}
@@ -91,6 +93,20 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         fatalError("init(coder:) has not been implemented")
     }
     
+    func activateWebView(_ webView: WKWebView) {
+        // do nothing
+        self.webView = webView
+        self.webView?.isHidden = true
+        view.addSubview(webView)
+    }
+    
+    func deactivateWebView() {
+        if (self.webView?.superview == self.view) {
+            self.webView?.removeFromSuperview()
+        }
+        self.webView?.isHidden = false
+    }
+    
     public func setParentRecogniserFor(view: UIView?, enabled: Bool) {
         var rnSuperView = (view != nil) ? view!.superview : UIApplication.shared.keyWindow!.rootViewController!.view
         while (rnSuperView != nil) {
@@ -108,6 +124,8 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         super.viewWillAppear(animated)
         
         self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path, "title": self.title ?? ""])
+        
+        activateWebView(self.manager.navSession.webView)
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -115,6 +133,11 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
 
         setParentRecogniserFor(view: self.view, enabled: false)
         visitableDidRender()
+    }
+    
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        deactivateWebView()
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
