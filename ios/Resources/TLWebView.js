@@ -20,6 +20,10 @@
         Turbolinks.visit(url)
       },
   
+      authenticateWithService: function(serviceName, signInURL, options) {
+        this.postMessage("authenticateService", { serviceName, signInURL, options })
+      },
+  
       postMessageAfterNextRepaint: function(name, data) {
         // Post immediately if document is hidden or message may be queued by call to rAF
         if (document.hidden) {

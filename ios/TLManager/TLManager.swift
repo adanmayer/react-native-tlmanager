@@ -24,7 +24,8 @@ public protocol TLManagerAppDelegate {
     func visitCompleted(_ manager: TLManager, url: URL)
     
     func executeActionWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: (() -> Void)?) -> Bool
-
+    func authenticateServiceWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)?) -> Bool
+    
     func visitStartupURL()
     func initialRequestFinished()
     func assignStartupURL(_ url: URL?)
@@ -84,6 +85,10 @@ extension TLManagerAppDelegate {
         return false // not handled
     }
     
+    func authenticateServiceWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)?) -> Bool {
+        return false // not handled
+    }
+
     func registerGlobalSwipe() -> Bool {
         return false
     }
@@ -716,6 +721,18 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
                 msgDelegate.executeActionWithData(self, data: data, completion: completion)
             } else {
                 print("Could not execute action: \(data)")
+            }
+        }
+    }
+    
+    public func defaultAuthenticateServiceWithWithData(_ data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)? = nil) {
+        // try to authenticate on application delegate
+        if !appDelegate.authenticateServiceWithData(self, data: data, completion: completion) {
+            // execute on current top view
+            if let msgDelegate = self.mainNavigation().topViewController as? ViewMsgBridgeDelegate {
+                msgDelegate.authenticateServiceWithData(self, data: data, completion: completion)
+            } else {
+                print("Could not authentication with service: \(data)")
             }
         }
     }

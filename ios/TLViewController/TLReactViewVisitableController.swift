@@ -175,6 +175,10 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         manager.executeAction(data: data)
         completion?()
     }
+
+    public func authenticateServiceWithData(_ manager: TLManager, data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)?) {
+        // do nothing
+    }
     
     public func notificationWithData(_ manager: TLManager, data: Dictionary<String, AnyObject>) {
         print("Notification: \(data)")

@@ -102,7 +102,7 @@ open class TLWebView: WebView {
             let error = (msg.data["error"] as? String) ?? "unknown"
             print("JavaScript error: \(error)")
             super.userContentController(userContentController, didReceive: message)
-        case .NotHandled:
+        case .AuthenticateService, .NotHandled:
             super.userContentController(userContentController, didReceive: message)
         }
         

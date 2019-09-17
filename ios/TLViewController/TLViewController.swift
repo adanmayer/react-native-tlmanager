@@ -18,6 +18,7 @@ public enum ViewAnimation : String {
 public protocol ViewMsgBridgeDelegate {
     // overrideables
     func executeActionWithData(_ manager: TLManager, data: Dictionary<String, AnyObject>, completion: (() -> Void)?)
+    func authenticateServiceWithData(_ manager: TLManager, data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)?)
     func notificationWithData(_ manager: TLManager, data: Dictionary<String, AnyObject>)
 }
 
