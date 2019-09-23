@@ -25,7 +25,7 @@ public protocol TLManagerAppDelegate {
     
     func executeActionWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: (() -> Void)?) -> Bool
     func authenticateServiceWithData(_ manager: TLManager,  data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)?) -> Bool
-    
+    func appResignData() -> Dictionary<String, Any>
     func visitStartupURL()
     func initialRequestFinished()
     func assignStartupURL(_ url: URL?)
@@ -51,6 +51,10 @@ public protocol TLManagerAppDelegate {
 
 // default implementation
 extension TLManagerAppDelegate {
+
+    func appResignData() -> Dictionary<String, Any> {
+        return [:]
+    }
     
     // override if you want to inject custom user scripts into main webview
     func addCustomUserScripts(webConfig: WKWebViewConfiguration) -> Bool {
@@ -301,9 +305,9 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 //            visitableView.visitableView.updateScreenshot()
 //            visitableView.visitableView.showScreenshot()
 //        }
-
+        let resignData = appDelegate.appResignData()
         DispatchQueue.main.async {
-            self.sendEvent(withName: "turbolinksAppResignActive", body: {})
+            self.sendEvent(withName: "turbolinksAppResignActive", body: resignData)
         }
     }
     
