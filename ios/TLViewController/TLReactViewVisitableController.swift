@@ -103,8 +103,8 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     func deactivateWebView() {
         if (self.webView?.superview == self.view) {
             self.webView?.removeFromSuperview()
+            self.webView?.isHidden = false
         }
-        self.webView?.isHidden = false
     }
     
     public func setParentRecogniserFor(view: UIView?, enabled: Bool) {
