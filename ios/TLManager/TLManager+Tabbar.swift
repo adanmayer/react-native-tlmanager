@@ -144,7 +144,7 @@ extension TLManager : UITabBarDelegate {
             if (item.tag >= 0) {
                 if let data = tabBarItemFor(tag: item.tag), data["href"] != "" {
                     let url = URL.init(string: data["href"]!)!
-                    self.sendEvent(withName: "turbolinksVisit", body: ["href": url.absoluteString, "path": url.path, "action": Action.Replace.rawValue, "popToRoot": true])
+                    self.sendEvent(withName: "turbolinksVisit", body: ["href": url.absoluteString, "path": url.path, "action": Action.Replace.rawValue, "title": item.title ?? "", "popToRoot": true])
                 }
             } else {
                 DispatchQueue.main.async {
