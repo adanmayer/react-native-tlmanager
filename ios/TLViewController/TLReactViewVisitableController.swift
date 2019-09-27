@@ -126,6 +126,9 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path, "title": self.title ?? ""])
         
         activateWebView(self.manager.navSession.webView)
+
+        let rootView = self.view as? RCTRootView
+        rootView?.contentView.isHidden = false  // unhide contentView
     }
     
     open override func viewDidAppear(_ animated: Bool) {
