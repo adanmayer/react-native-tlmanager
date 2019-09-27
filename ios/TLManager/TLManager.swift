@@ -378,9 +378,15 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         }
     }
     
-    @objc public func popToRoot() {
+    @objc public func popToRoot(hideWebView: Bool = false) {
         if (hasNavigation) {
             navigation.popToRootViewController(animated: false)
+            if hideWebView {
+                navSession.webView.isHidden = true
+                if let vc = navigation.viewControllers.first as? TLViewController {
+                    vc.visitableView.clearScreenshot()
+                }
+            }
         }
     }
     
