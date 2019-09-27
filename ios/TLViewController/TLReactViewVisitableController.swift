@@ -94,17 +94,10 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     }
     
     func activateWebView(_ webView: WKWebView) {
-        // do nothing
         self.webView = webView
-        self.webView?.isHidden = true
-        view.addSubview(webView)
     }
     
     func deactivateWebView() {
-        if (self.webView?.superview == self.view) {
-            self.webView?.removeFromSuperview()
-            self.webView?.isHidden = false
-        }
     }
     
     public func setParentRecogniserFor(view: UIView?, enabled: Bool) {
@@ -124,9 +117,9 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
         super.viewWillAppear(animated)
         
         self.manager.sendEvent(withName: "turbolinksRNViewAppear", body: ["href": self.moduleURL.absoluteString, "path": self.moduleURL.path, "title": self.title ?? ""])
-        
-        activateWebView(self.manager.navSession.webView)
 
+        activateWebView(self.manager.navSession.webView)
+        
         let rootView = self.view as? RCTRootView
         rootView?.contentView.isHidden = false  // unhide contentView
     }
