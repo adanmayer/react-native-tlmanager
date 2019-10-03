@@ -385,6 +385,8 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
     public func popToRoot(willReplaceRoot: Bool) -> Bool {
         if (hasNavigation && (navigation.viewControllers.count > 1)) {
             navigation.popToRootViewController(animated: false)
+
+            // hide webView & screenshot, otherwise we have a flicker
             if willReplaceRoot {
                 navSession.webView.isHidden = true
                 if let vc = navigation.viewControllers.first as? TLViewController {
