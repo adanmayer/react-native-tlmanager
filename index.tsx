@@ -132,7 +132,11 @@ export class TLManager {
 
     mountViewManager(viewTag: number, route: TLRoute, options: TLAppOptions) {
         options = this._processAppOptions(options)
-        RNTLManager.mountViewManager(viewTag, route, options)
+        if (Platform.OS == 'ios') {
+            RNTLManager.mountViewManager(viewTag, route, options)
+        } else {
+            RNTLManager.mountViewManager(route, options)
+        }
     }
 
     /*
@@ -249,16 +253,12 @@ export class TLManager {
         RNTLManager.visit(route)
     }
 
-    debugMsg(message: string): void {
+    debugMsg(message: string) {
         RNTLManager.debugMsg(message);
     }
 
-    trackEvent(eventName: string, data: any): void {
+    trackEvent(eventName: string, data: any) {
         RNTLManager.trackEvent(eventName, data);
-    }
-
-    versionInfo(): string {
-        return RNTLManager.versionInfo();
     }
 
     delay(ms: number) {
@@ -315,11 +315,11 @@ export class TLManager {
         Register to Turbolink events
     */
 
-    addEventListener(eventName: TLEventNames, callback: (data: any) => void): void {
+    addEventListener(eventName: TLEventNames, callback: (data: any) => void) {
         RNTLManagerEmitter.addListener(eventName, callback)
     }
 
-    removeEventListener(eventName: TLEventNames, callback: (data: any) => void): void {
+    removeEventListener(eventName: TLEventNames, callback: (data: any) => void) {
         RNTLManagerEmitter.removeListener(eventName, callback)
     }
     
