@@ -126,6 +126,11 @@ export class TLManager {
         // console.log('Turbolinks instance created')
     }
 
+
+    isUnmounted(): boolean {
+        return !RNTLManager.isMounted()
+    }
+
     /*
         Mounting Turbolinks manager at a specific viewTag and initialize route with specific app options 
     */
@@ -261,7 +266,19 @@ export class TLManager {
         RNTLManager.trackEvent(eventName, data);
     }
 
-    delay(ms: number) {
+    showDialog(title: string, message: string, okButton: string): Promise<any> {
+        return RNTLManager.showDialog(title, message, okButton);
+    }
+
+    showOkCancelDialog(title: string, message: string, okButton: string, cancelButton: String): Promise<boolean> {
+        return RNTLManager.showOkCancelDialog(title, message, okButton, cancelButton);
+    }
+
+    showOptionDialog(title: string, message: string, okButton: string, neutralButton: String, cancelButton: String): Promise<string> {
+        return RNTLManager.showOptionDialog(title, message, okButton, neutralButton, cancelButton);
+    }
+
+    async delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );
     }
     /*
@@ -279,10 +296,8 @@ export class TLManager {
                 try {
                     response = await this.injectJavaScript(script)
                 } catch (error) {
+                    console.log(error)
                     reqError = error
-                }
-                if (reqError) {
-                    await this.delay(500) // wait 500ms
                 }
             } while ((retryCount-- > 0) && (reqError))
 
@@ -299,7 +314,9 @@ export class TLManager {
         if (Platform.OS == 'ios') {
             return RNTLManager.injectJavaScript(script)
         } else {
-            return RNTLManager.injectJavaScript(script).then((r: any) => JSON.parse(r))
+            return RNTLManager.injectJavaScript(script).then((r: any) => { 
+                return JSON.parse(r)
+            })
         }
     }
 
@@ -307,7 +324,9 @@ export class TLManager {
         if (Platform.OS == 'ios') {
             return RNTLManager.injectJavaScriptWithTarget(target, script)
         } else {
-            return RNTLManager.injectJavaScriptWithTarget(target, script).then((r: any) => JSON.parse(r))
+            return RNTLManager.injectJavaScriptWithTarget(target, script).then((r: any) => {
+                return JSON.parse(r)
+            })
         }
     }
 
