@@ -250,12 +250,12 @@ export class TLManager {
         RNTLManager.back()
     }
 
-    backTo(route: TLRoute) {
-        RNTLManager.backTo(route)
+    backTo(route: TLRoute): Promise<any> {
+        return RNTLManager.backTo(route)
     }
 
-    visit(route: TLRoute) {
-        RNTLManager.visit(route)
+    visit(route: TLRoute): Promise<any> {
+        return RNTLManager.visit(route)
     }
 
     debugMsg(message: string) {
