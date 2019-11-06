@@ -24,6 +24,7 @@ export enum TLEventNames {
     RNViewAppear = "turbolinksRNViewAppear",
     RNViewDisappear = "turbolinksRNViewDisappear",
     Unmount = "turbolinksUnmount",
+    RestoreState = "turbolinksRestoreState"
 }
 
 export enum TLScriptTarget {
