@@ -297,8 +297,10 @@ export class TLManager {
                 try {
                     response = await this.injectJavaScript(script)
                 } catch (error) {
-                    console.log(error)
                     reqError = error
+                }
+                if (reqError) {
+                    await this.delay(500) // wait 500ms
                 }
             } while ((retryCount-- > 0) && (reqError))
 
