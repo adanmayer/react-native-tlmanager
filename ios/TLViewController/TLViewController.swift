@@ -91,6 +91,8 @@ open class TLViewController: CustomViewController, Visitable {
     
     open func didRedirect(to: URL) {
         self.visitableURL = to
+        // notify react native part
+        manager.sendEvent(withName: "turbolinksRedirect", body: ["href": to.absoluteString, "path": to.path])
     }
     
     func reload() {
