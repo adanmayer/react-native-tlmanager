@@ -299,7 +299,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         lastActivation = NSDate()
         isAppActive = false
 
-        resignFocusInWebView()
+        // resignFocusInWebView()
         // after becoming active again reload page
 //        if let visitableView = self.navSession.topmostVisitable {
 //            visitableView.visitableView.updateScreenshot()
@@ -455,7 +455,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
                                     _ reject: @escaping ((String?, Error?) -> Swift.Void)) {
         let data = actionData as Dictionary<String, AnyObject>
         if data["action"] != nil {
-            defaultExecuteActionWithData(data) {
+            handleExecuteActionWithData(data) {
                 resolve(true)
             }
         } else {
@@ -599,7 +599,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
 
         if (tRoute.url != nil) {
             if (tRoute.url?.host == "ReactNative.executeAction") {
-                self.defaultExecuteActionWithData(tRoute.url!.params())
+                self.handleExecuteActionWithData(tRoute.url!.params())
             } else {
                 self.presentVisitableForSession(tRoute)
             }
@@ -728,7 +728,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         //        customMenuIcon = RCTConvert.uiImage(style["menuIcon"])
     }
     
-    public func defaultNotificationWithData(_ data: Dictionary<String, AnyObject>) {
+    public func handleNotificationWithData(_ data: Dictionary<String, AnyObject>) {
         if let msgDelegate = self.mainNavigation().topViewController as? ViewMsgBridgeDelegate {
             msgDelegate.notificationWithData(self, data: data)
         } else {
@@ -736,7 +736,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         }
     }
     
-    public func defaultExecuteActionWithData(_ data: Dictionary<String, AnyObject>, completion: (() -> Void)? = nil) {
+    public func handleExecuteActionWithData(_ data: Dictionary<String, AnyObject>, completion: (() -> Void)? = nil) {
         // try to execute on application delegate
         if !appDelegate.executeActionWithData(self, data: data, completion: completion) {
             // execute on current top view
@@ -748,7 +748,7 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         }
     }
     
-    public func defaultAuthenticateServiceWithWithData(_ data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)? = nil) {
+    public func handleAuthenticateServiceWithWithData(_ data: Dictionary<String, AnyObject>, completion: ((Bool, Dictionary<String, AnyObject>) -> Void)? = nil) {
         // try to authenticate on application delegate
         if !appDelegate.authenticateServiceWithData(self, data: data, completion: completion) {
             // execute on current top view
@@ -760,18 +760,12 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         }
     }
 
-    public func defaultPreprocessingForURL(_ URL: URL) -> Bool {
+    public func handlePreprocessingForURL(_ URL: URL) -> Bool {
         return self.appDelegate.doPreprocessingForURL(self, url: URL)
     }
 
-    public func defaultPostprocessingForResponse(_ response: WKNavigationResponse) -> Bool {
+    public func handlePostprocessingForResponse(_ response: WKNavigationResponse) -> Bool {
         return self.appDelegate.doPostprocessingForResponse(self, response: response)
-    }
-	
-    public func executeAction(data: Dictionary<String, AnyObject>) {
-        DispatchQueue.main.async {
-            self.sendEvent(withName: "turbolinksExecuteAction", body: data)
-        }
     }
     
     func handleViewMounted() {
@@ -786,6 +780,12 @@ public class TLManager : RCTEventEmitter, UIGestureRecognizerDelegate {
         if (self.initialRequest) {
             self.initialRequest = false
             appDelegate.initialRequestFinished();
+        }
+    }
+    
+    public func sendExecuteAction(data: Dictionary<String, AnyObject>) {
+        DispatchQueue.main.async {
+            self.sendEvent(withName: "turbolinksExecuteAction", body: data)
         }
     }
     

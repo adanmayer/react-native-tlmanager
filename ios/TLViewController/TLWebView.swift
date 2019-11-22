@@ -9,6 +9,16 @@ public protocol MsgBridgeDelegate: class {
 
 open class TLWebView: WebView {
     public weak var msgBridgeDelegate: MsgBridgeDelegate?
+//  
+//    public var accessoryView: UIView?
+//    
+//    public override var inputAccessoryView: UIView? {
+//        return super.inputAccessoryView // accessoryView
+//    }
+//    
+//    public override var inputAssistantItem: UITextInputAssistantItem {
+//        return super.inputAssistantItem
+//    }
     
     public override init(configuration: WKWebViewConfiguration) {
         super.init(configuration: configuration)

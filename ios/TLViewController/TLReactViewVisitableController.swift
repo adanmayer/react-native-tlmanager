@@ -165,7 +165,7 @@ public class TLReactViewVisitableController: CustomViewController, Visitable, Vi
     }
     
     public func executeActionWithData(_ manager: TLManager, data: Dictionary<String, AnyObject>, completion: (() -> Void)? = nil) {
-        manager.executeAction(data: data)
+        manager.sendExecuteAction(data: data)
         completion?()
     }
 

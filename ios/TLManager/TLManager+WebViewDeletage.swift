@@ -11,15 +11,15 @@ import Turbolinks
 extension TLManager: MsgBridgeDelegate {
 
     public func webView(_ sender: NSObject, webView: WebView, executeActionWithData data: Dictionary<String, AnyObject>, completion: (() -> Void)? = nil) {
-        defaultExecuteActionWithData(data, completion: completion)
+        handleExecuteActionWithData(data, completion: completion)
     }
     
     public func webView(_ sender: NSObject, webView: WebView, notificationWithData data: Dictionary<String, AnyObject>) {
-        defaultNotificationWithData(data)
+        handleNotificationWithData(data)
     }
 
     public func webView(_ sender: NSObject, webView: WebView, authenticateServiceWithData data: Dictionary<String, AnyObject>) {
-        defaultAuthenticateServiceWithWithData(data)
+        handleAuthenticateServiceWithWithData(data)
     }
     
     public func webView(_ sender: NSObject, webView: WebView, clientInitializedWithData data: Dictionary<String, AnyObject>) {

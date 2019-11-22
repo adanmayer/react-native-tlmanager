@@ -68,11 +68,11 @@ extension TLManager: SessionDelegate {
     }
 
     public func session(_ session: Session, preProcessingForURL URL: URL) -> Bool {
-        return defaultPreprocessingForURL(URL)
+        return handlePreprocessingForURL(URL)
     }
 
     public func session(_ session: Session, postProcessingForResponse response: WKNavigationResponse) -> Bool {
-        return defaultPostprocessingForResponse(response)
+        return handlePostprocessingForResponse(response)
     }
     
     public func sessionDidStartRequest(_ session: Session) {
